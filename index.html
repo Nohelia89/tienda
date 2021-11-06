@@ -1,3 +1,9 @@
+<?php
+
+	include("inc/productosAD.php");	
+	
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
@@ -45,16 +51,26 @@
 		</header>
 
 		<div class="row row-cols-1 row-cols-md-3 g-4" >
-			<div class="col">
-			  <div class="card h-100">
-				<img src="imagenes/lavarropas1.jpg" class="img-fluid" style="width: 300px; height: 300px;" alt="...">
-				<div class="card-body">
-				  <h5 class="card-title">Card title</h5>
-				  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				</div>
-			  </div>
-			</div>
 			
+			<?php
+				
+				$productos = listar();
+				for($i=0; $i<count($productos); $i++)
+				{
+					echo "
+					<div class='col'>
+						<div class='card h-100'>
+							<button id='btnProd".$productos[$i][0]."' value='Modificar' />
+							<img src='".$productos[$i][2]."' class='img-fluid' style='width: 300px; height: 300px;' alt='...'>
+							<div class='card-body'>
+								<h5 class='card-title'>".$productos[$i][1]."</h5>
+								<p class='card-text'>".$productos[$i][0]."</p>
+							</div>
+						</div>
+					</div>";
+				}
+			?>
+			<!--
 			<div class="col">
 			  <div class="card h-100">
 				<img src="imagenes/tele1.jpg" class="img-fluid" style="width: 300px; height: 300px;"  alt="...">
@@ -73,6 +89,7 @@
 				</div>
 			  </div>
 			</div>
+			-->
 		  </div>
 
 
