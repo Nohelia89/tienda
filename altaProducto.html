@@ -65,7 +65,7 @@
         <section>
             <div class="container">
                 <div class="card card-container">
-                    <form class="form-horizontal" action="newproduct.php" method="POST">
+                    <form class="form-horizontal" action="newproduct.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label class="control-label col-sm-12" for="txtId">Id:</label>
                             <div class="col-sm-12">
@@ -97,24 +97,12 @@
                                 <input type="number" class="form-control" id="txtStock" name="txtStock" placeholder="Ingresar Stock">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-12" for="txtImagen1">Imagen:</label>
-                            <div class="col-sm-12">
-                                <input type="file" class="form-control" id="txtImagen1" name="txtImagen1" placeholder="Ingresar nombre">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-12" for="txtImagen2">Imagen:</label>
-                            <div class="col-sm-12">
-                                <input type="file" class="form-control" id="txtImagen2" name="txtImagen2" placeholder="Ingresar nombre">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-12" for="txtImagen3">Imagen:</label>
-                            <div class="col-sm-12">
-                                <input type="file" class="form-control" id="txtImagen3" name="txtImagen3" placeholder="Ingresar nombre">
-                            </div>
-                        </div>
+						<div class="mb-3">
+							<label for="formFileMultiple" class="form-label">Multiple files input example</label>
+							<input class="form-control" type="file" id="formFileMultiple" name="img" multiple>
+						  </div>
+                        
+                        
 
                         <div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
                             <div class="col-sm-6">
