@@ -5,10 +5,15 @@
 	
 	if(isset($_SESSION["login"]))
 	{
-		if($_SESSION["login"]){
-			header("Location: ./principal.php");
+		if(!$_SESSION["login"]){
+			header("Location: ./index.php");
 			exit();
 		}//endif
+	}
+	else
+	{
+		header("Location: ./index.php");
+		exit();
 	}
 ?>
 
@@ -39,25 +44,23 @@
 				  <div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 					  <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="index.php">Bienvenido</a>
+						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="">Productos</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="login.html">Ingresar</a>
+						<a class="nav-link" href="">Perfil</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="registro.html">Registrarse</a>
-					  </li>
-					  <!-- esto va solo si estas logueado
-					  <li class="nav-item">
-						<a class="nav-link" href="#">Carrito</a>
+						<a class="nav-link" href="">Mi Carrito</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link " href="#">Historial de Compras</a>
+						<a class="nav-link" href="">Mis Compras</a>
 					  </li>
-					  -->
+					  <li class="nav-item">
+						<a class="nav-link" href="">Cerrar Sesion</a>
+					  </li>
 					</ul>
 				  </div>
 				</div>

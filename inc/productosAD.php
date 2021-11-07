@@ -10,9 +10,7 @@
 		for ($i=0; $i<count($imagenes); $i++){
 			$sql = "insert into imagenes(id_producto, url_imagen) VALUES ($id,'$imagenes[$i]')";
 			mysqli_query($link, $sql);
-		}
-
-		
+		}	
 		mysqli_close($link);
 	}//end
 	

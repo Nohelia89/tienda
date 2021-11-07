@@ -1,17 +1,13 @@
 <?php
-	include("inc/productosAD.php");	
 	
-	session_start();
-	
-	if(isset($_SESSION["login"]))
-	{
-		if($_SESSION["login"]){
-			header("Location: ./principal.php");
-			exit();
-		}//endif
-	}
+	$pag = $_GET['pag'];
+	$err = $_GET['msg'];
+	switch($err){
+		case "userok":
+			$msg = "Ud. Se ha registrado correctamente.";
+			break;
+	}//end case
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
@@ -21,12 +17,33 @@
 		refresh automatico ->
 		<meta http-equiv="refresh" content="3; URL=index.php" />
 		-->
-		<title>Index</title>
-	
+		<title>Atencion</title>
+		<!--
+		invoca archivo css -->
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<!-- invoca script -->
+		
+		<script type="text/javascript">
+			var pag;
+			function init(p){
+				pag = p;
+				setTimeout("Redirec()",3000);
+			}//end
+			
+			function Redirec(){
+				window.location = pag;
+			}//end
+		</script>
+		<style>
+			.cSp{
+				font-family:arial;
+				font-size:12pt;
+				color:#FFFFFF;
+			}
+		</style>
 	</head>
-	<body>
+	<body onload="init('<?php echo $pag; ?>')">
 		<header>
 			<div class="cbaner">
 			</div>
@@ -41,65 +58,20 @@
 					  <li class="nav-item">
 						<a class="nav-link" aria-current="page" href="index.php">Bienvenido</a>
 					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="">Productos</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="login.html">Ingresar</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="registro.html">Registrarse</a>
-					  </li>
-					  <!-- esto va solo si estas logueado
-					  <li class="nav-item">
-						<a class="nav-link" href="#">Carrito</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link " href="#">Historial de Compras</a>
-					  </li>
-					  -->
 					</ul>
 				  </div>
 				</div>
 			  </nav>
 		</header>
 		
-		<div class="row row-cols-1 row-cols-md-3 g-4" >
-			
-			<?php
-				
-				$productos = listar();
-				for($i=0; $i<count($productos); $i++)
-				{
-					$html = "<div class='col'>
-								<div class='card h-100' style='display: table; padding: 20px;'>";
-					
-					$imagenes = listarImagenes($productos[$i]['id_producto']);
-					for($ii=0; $ii<count($imagenes); $ii++)
-					{
-						$html = $html."<div style='position: relative; float: left;'>";
-						$html = $html."<img src='./imagenes/".$imagenes[$ii][0]."' class='img-fluid' style='width: 140px; height: 110px; padding: 5px;' alt='...' />";
-						$html = $html."</div>";
-					}
-					
-					$html = $html."<div class='card-body'>
-									<h5 class='card-title'>Producto: ".$productos[$i]['nombre']."</h5>
-									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
-									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
-									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
-									</div>
-									</div>
-								</div>";
-					echo $html;
-				}
-			?>
-		  </div>
-
+		<div style="margin-top:50px; background-color:#444444; text-align:center; padding:20px;">
+			<span class="cSp"><?php echo $msg; ?></span><br />
+			<span class="cSp">Redireccionando...</span>
+		</div>
+		
 		<footer>
 
 		</footer>
-
-
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 	</body>

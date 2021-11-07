@@ -1,0 +1,18 @@
+.cbaner {
+	background-image: url('../imagenes/baner.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height:230px;
+}
+.card-container{
+	display: flex;
+	max-width: 500px;
+	border: 1px solid #111;
+	margin:auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	color: black;
+}
+.form-group{
+	margin: 5px 20px;
+}
