@@ -21,7 +21,7 @@
 		$link = Conectarse();
 		//va el select
 		
-		$resultado = mysql_fetch_array($link, "SELECT p.id, p.nombre, i.url_imagen FROM producto p JOIN imagenes i ON i.id_producto=p.id_producto");
+		$resultado = mysql_fetch_array($link, "SELECT p.id_producto, p.nombre, i.url_imagen FROM producto p JOIN imagenes i ON i.id_producto=p.id_producto");
 				
 		mysqli_close($link);
 		
