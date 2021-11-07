@@ -17,16 +17,26 @@
 	}//end
 	
 	function listar(){
-		
-		$link = Conectarse();
-		//va el select
-		
-		$resultado = mysql_fetch_array($link, "SELECT p.id_producto, p.nombre, i.url_imagen FROM producto p JOIN imagenes i ON i.id_producto=p.id_producto");
-				
-		mysqli_close($link);
-		
-		return $resultado;
-		
-		//$resultado[i][0]
+		$resu = array();
+		$sql = "SELECT id_producto, nombre, descripcion, precio, stock FROM producto WHERE activo=1";
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$resu[$i] = $reg;
+			$i++;
+		}//wend
+		return $resu;
+	}
+	
+	function listarImagenes($idProducto){
+		$resu = array();
+		$sql = "SELECT url_imagen FROM imagenes WHERE id_producto='".$idProducto."'";
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$resu[$i] = $reg;
+			$i++;
+		}//wend
+		return $resu;
 	}
 ?>

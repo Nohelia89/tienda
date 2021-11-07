@@ -31,17 +31,25 @@
 				  <div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 					  <li class="nav-item">
-						<a class="nav-link disabled" aria-current="page" href="#">Bienvenido Facundo</a>
+						<a class="nav-link" aria-current="page" href="index.php">Bienvenido</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="index.html">Productos</a>
+						<a class="nav-link" href="">Productos</a>
 					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="">Ingresar</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="">Registrarse</a>
+					  </li>
+					  <!-- esto va solo si estas logueado
 					  <li class="nav-item">
 						<a class="nav-link" href="#">Carrito</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link " href="#">Historial de Compras</a>
 					  </li>
+					  -->
 					</ul>
 				  </div>
 				</div>
@@ -57,41 +65,29 @@
 				$productos = listar();
 				for($i=0; $i<count($productos); $i++)
 				{
-					echo "
-					<div class='col'>
-						<div class='card h-100'>
-							<button id='btnProd".$productos[$i][0]."' value='Modificar' />
-							<img src='".$productos[$i][2]."' class='img-fluid' style='width: 300px; height: 300px;' alt='...'>
-							<div class='card-body'>
-								<h5 class='card-title'>".$productos[$i][1]."</h5>
-								<p class='card-text'>".$productos[$i][0]."</p>
-							</div>
-						</div>
-					</div>";
+					$html = "<div class='col'>
+								<div class='card h-100' style='display: table; padding: 20px;'>";
+					
+					$imagenes = listarImagenes($productos[$i]['id_producto']);
+					for($ii=0; $ii<count($imagenes); $ii++)
+					{
+						$html = $html."<div style='position: relative; float: left;'>";
+						$html = $html."<img src='./imagenes/".$imagenes[$ii][0]."' class='img-fluid' style='width: 140px; height: 110px; padding: 5px;' alt='...' />";
+						$html = $html."</div>";
+					}
+					
+					$html = $html."<div class='card-body'>
+									<h5 class='card-title'>Producto: ".$productos[$i]['nombre']."</h5>
+									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
+									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
+									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
+									</div>
+									</div>
+								</div>";
+					echo $html;
 				}
 			?>
-			<!--
-			<div class="col">
-			  <div class="card h-100">
-				<img src="imagenes/tele1.jpg" class="img-fluid" style="width: 300px; height: 300px;"  alt="...">
-				<div class="card-body">
-				  <h5 class="card-title">Card title</h5>
-				  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-				</div>
-			  </div>
-			</div>
-			<div class="col">
-			  <div class="card h-100">
-				<img src="imagenes/cafetera1.jpg" class="img-fluid" style="width: 300px; height: 300px;"  alt="...">
-				<div class="card-body">
-				  <h5 class="card-title">Card title</h5>
-				  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				</div>
-			  </div>
-			</div>
-			-->
 		  </div>
-
 
 		<footer>
 
