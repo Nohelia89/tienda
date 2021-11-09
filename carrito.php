@@ -1,3 +1,23 @@
+<?php
+	include("inc/carritoAD.php");	
+	
+	session_start();
+	
+	if(isset($_SESSION["login"]))
+	{
+		if(!$_SESSION["login"]){
+			header("Location: ./index.php");
+			exit();
+		}//endif
+	}
+	else
+	{
+		header("Location: ./index.php");
+		exit();
+	}
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
@@ -47,34 +67,37 @@
 		<table class="table table-striped">
 			<thead>
 			  <tr>
-				<th scope="col">Fecha</th>
-				<th scope="col">Codigo</th>
-				<th scope="col">Producto</th>
-				<th scope="col">Imagen</th>
+				<th scope="col">Articulo</th>
+				<th scope="col">Cantidad</th>
+				<th scope="col">Precio</th>
 				
 			  </tr>
 			</thead>
 			<tbody>
-			  <tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			  </tr>
-			  <tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			  </tr>
-			  <tr>
-				<th scope="row">3</th>
-				<td colspan="2">Larry the Bird</td>
-				<td>@twitter</td>
-			  </tr>
+
+			<?php 
+			
+			$lista=getCarrito($_SESSION["documento"]);
+			$total=0;
+			for($i=0; $i<count($lista); $i++)
+			{
+
+			$html="<tr><th scope='row'>".$lista[$i]["nrolinea"]."</th>";
+			$html=$html."<td>".$lista[$i]['detalle']."</td>";
+			$html=$html."<td>".$lista[$i]['cantidad']."</td>";
+			$html=$html."<td>".$lista[$i]['precio']."</td>";
+			$html=$html."</tr>";
+			$total=$total+($lista[$i]['cantidad']*$lista[$i]['precio']);
+			echo $html;
+		}
+			
+			?>
+			
 			</tbody>
 		  </table>
-
+	
+		  <span class="nav-link" aria-current="page" >Total: <?php echo $total; ?></span>
+		  
 		<footer>
 
 		</footer>

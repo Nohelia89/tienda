@@ -11,6 +11,7 @@
 		$_SESSION["login"]=true;
 		$_SESSION["usuario"]=$rs['nombre'];
 		$_SESSION["esadmin"]=$rs['esadmin'];
+		$_SESSION["documento"]=$user;
 		header("Location: index.php");
 	}else{
 		header("Location: pageerror.php?err=erruser&pag=login.html");
