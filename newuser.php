@@ -1,17 +1,19 @@
 <?php
 
-include("conex.php");
-$link=Conectarse();
+include("inc/usuariosAD.php");
+
+
 $id=$_POST['txtUser'];
-echo $id;
 $pass=$_POST['txtPass'];
 $nom=$_POST['txtNom'];
 $ape=$_POST['txtApe'];
 $dir=$_POST['txtDir'];
 $mail=$_POST['txtMail'];
-
-mysqli_query($link,"insert into cliente(id_cliente, nombre, apellido, email, password, direccion) VALUES ($id,'$nom','$ape','$mail','$pass','$dir') ");
-
-
-mysqli_close($link);
+if (!exists($id)){
+insertUser($id, $pass, $nom, $ape, $mail, $dir);
+header("Location:login.html");
+}
+else{
+    header("Location: pageerror.php?err=userex&pag=registro.html");
+}
 ?>

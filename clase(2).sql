@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2021 a las 22:30:26
+-- Tiempo de generación: 09-11-2021 a las 23:05:57
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.3.30
 
@@ -49,12 +49,26 @@ INSERT INTO `imagenes` (`id_producto`, `url_imagen`) VALUES
 
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `precio` float(10,2) NOT NULL,
+  `total` double NOT NULL,
   `fecha` datetime NOT NULL,
-  `completado` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
-  `confirmado` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+  `confirmado` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `usuario` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidolineas`
+--
+
+CREATE TABLE `pedidolineas` (
+  `idpedido` int(11) NOT NULL,
+  `nrolinea` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `detalle` varchar(200) NOT NULL,
+  `precio` double NOT NULL,
+  `idproducto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -99,7 +113,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`documento`, `password`, `nombre`, `apellido`, `email`, `direccion`, `esadmin`) VALUES
-('1', '1', 'Nohelia', '1', 'as', '1', 0);
+('1', '1', 'Nohelia', '1', 'as', '1', 0),
+('12345', 'asd', 'juan', 'sadf', 'asd', 'asd', 0);
 
 -- --------------------------------------------------------
 
@@ -144,8 +159,14 @@ ALTER TABLE `imagenes`
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id_pedido`),
-  ADD KEY `id_cliente` (`id_cliente`);
+  ADD PRIMARY KEY (`id_pedido`);
+
+--
+-- Indices de la tabla `pedidolineas`
+--
+ALTER TABLE `pedidolineas`
+  ADD PRIMARY KEY (`idpedido`,`nrolinea`),
+  ADD KEY `lineapedidoproducto` (`idproducto`);
 
 --
 -- Indices de la tabla `producto`
@@ -171,8 +192,8 @@ ALTER TABLE `venta`
 -- Indices de la tabla `ventalineas`
 --
 ALTER TABLE `ventalineas`
-  ADD KEY `lineaproducto` (`idproducto`),
-  ADD KEY `lineaventa` (`idventa`);
+  ADD PRIMARY KEY (`idventa`,`nrolinea`),
+  ADD KEY `lineaproducto` (`idproducto`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -201,10 +222,11 @@ ALTER TABLE `imagenes`
   ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `pedido`
+-- Filtros para la tabla `pedidolineas`
 --
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE `pedidolineas`
+  ADD CONSTRAINT `lineapedido` FOREIGN KEY (`idpedido`) REFERENCES `pedido` (`id_pedido`),
+  ADD CONSTRAINT `lineapedidoproducto` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`id_producto`);
 
 --
 -- Filtros para la tabla `venta`
