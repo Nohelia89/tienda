@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2021 a las 23:05:57
+-- Tiempo de generación: 11-11-2021 a las 18:31:23
 -- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.3.30
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `clase`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Varios'),
+(2, 'Heladeras');
 
 -- --------------------------------------------------------
 
@@ -82,15 +101,16 @@ CREATE TABLE `producto` (
   `descripcion` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `precio` float(10,2) DEFAULT NULL,
   `stock` int(250) DEFAULT NULL,
-  `activo` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
+  `activo` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
+  `categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `activo`) VALUES
-(12312, 'asfsad', 'asdfas', 21312.00, 213123, '1');
+INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `activo`, `categoria`) VALUES
+(12312, 'asfsad', 'asdfas', 21312.00, 213123, '1', 0);
 
 -- --------------------------------------------------------
 
@@ -150,6 +170,12 @@ CREATE TABLE `ventalineas` (
 --
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `imagenes`
 --
 ALTER TABLE `imagenes`
@@ -198,6 +224,12 @@ ALTER TABLE `ventalineas`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`

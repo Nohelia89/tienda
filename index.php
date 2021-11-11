@@ -10,6 +10,12 @@
 			exit();
 		}//endif
 	}
+	
+	$idCategoria=0;
+	if(isset($_GET["categoria"]))
+	{
+		$idCategoria = $_GET["categoria"];
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,12 +31,21 @@
 	
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+		<script type="text/javascript">
+			function buscarPorCategoria()
+			{
+				var cmbFil = document.getElementById("comboCategorias");
+				var sele = cmbFil.options[cmbFil.selectedIndex].id;
+				window.location = "index.php?categoria=" + sele;
+			}
+		</script>
 	</head>
 	<body>
 		<header>
 			<div class="cbaner">
 			</div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%;">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 				  <a class="navbar-brand" href="#"></a>
 				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,13 +77,17 @@
 				  </div>
 				</div>
 			  </nav>
+			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
+				<span style="margin:10px;">Categoria:</span><span style="margin:10px;"><?php echo comboCategorias($idCategoria); ?></span>
+				<input type="button" value="Buscar" onclick="buscarPorCategoria();" />
+			  </div>
 		</header>
 		
 		<div class="row row-cols-1 row-cols-md-3 g-4" >
 			
 			<?php
+				$productos = listar($idCategoria);
 				
-				$productos = listar();
 				for($i=0; $i<count($productos); $i++)
 				{
 					$html = "<div class='col'>
