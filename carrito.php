@@ -67,10 +67,11 @@
 		<table class="table table-striped">
 			<thead>
 			  <tr>
+			  	<th scope="col">Linea</th>
 				<th scope="col">Articulo</th>
 				<th scope="col">Cantidad</th>
 				<th scope="col">Precio</th>
-				
+				<th scope="col"></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -86,6 +87,8 @@
 			$html=$html."<td>".$lista[$i]['detalle']."</td>";
 			$html=$html."<td>".$lista[$i]['cantidad']."</td>";
 			$html=$html."<td>".$lista[$i]['precio']."</td>";
+	
+			$html=$html."<td><input type='button' value='eliminar' onclick='window.location=\"deleteCarrito.php?pedido=".$lista[$i]['idpedido']."&nrolinea=".$lista[$i]['nrolinea']."\"' /></td>";
 			$html=$html."</tr>";
 			$total=$total+($lista[$i]['cantidad']*$lista[$i]['precio']);
 			echo $html;

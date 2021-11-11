@@ -1,6 +1,6 @@
 <?php
 
-	include("inc/productosAD.php");
+	include("inc/carritoAD.php");
 
 
 

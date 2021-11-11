@@ -4,7 +4,7 @@
 	function getCarrito($user){
 		$resu = array();
 		//$sql = "SELECT documento, nombre, apellido, esadmin FROM usuario WHERE user='".strtoupper($user)."' AND pass='".passEnc(strtoupper($pass))."'";
-		$sql = "SELECT l.idpedido, l.nrolinea, l.idproducto, l.detalle, l.cantidad, l.precio  FROM pedidolineas l join pedido p ON p.id_pedido = l.idpedido WHERE p.usuario='".$user."' AND p.confirmado=0 order by l.nrolinea";
+		$sql = "SELECT l.idpedido, l.nrolinea, l.idproducto, l.detalle, l.cantidad, l.precio  FROM pedidolineas l join pedido p ON p.id_pedido = l.idpedido WHERE p.usuario='".$user."' AND p.confirmado='0' order by l.nrolinea";
 		$rs = Ejecutar($sql);
 		$i = 0;
 		while($reg = mysqli_fetch_array($rs)){
@@ -26,6 +26,14 @@
 		$rs = Ejecutar($sql);
 		
 		return mysqli_num_rows($rs);
+	}
+
+	function eliminarProductoPedido($idpedido, $nrolinea){
+	
+		
+		$sql = "DELETE FROM pedidolineas WHERE idpedido=".$idpedido." AND nrolinea=".$nrolinea;
+		Ejecutar($sql);
+	
 	}
 
 	//end
