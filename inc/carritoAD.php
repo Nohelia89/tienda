@@ -33,11 +33,7 @@
 
 	}
 
-	function insertUser($documento, $password, $nombre, $apellido, $email, $direccion)
-	{
-		$sql = "INSERT INTO usuario(documento, password, nombre, apellido, email, direccion, esadmin) VALUES ('$documento','$password','$nombre','$apellido','$email','$direccion',0);";
-		Ejecutar($sql);
-	}
+
 ?>
 
 

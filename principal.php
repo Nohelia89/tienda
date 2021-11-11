@@ -68,10 +68,10 @@
 						<a class="nav-link" href="">Perfil</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="">Mi Carrito</a>
+						<a class="nav-link" href="carrito.php">Mi Carrito</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="">Mis Compras</a>
+						<a class="nav-link" href="historial.php">Mis Compras</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
