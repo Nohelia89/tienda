@@ -13,9 +13,54 @@
 		}//wend
 		return $resu;
 	}
+	function insertarProductoPedido($idpedido, $nrolinea, $cantidad, $detalle, $precio, $idproducto){
+	
+		
+		$sql = "INSERT INTO pedidolineas(idpedido, nrolinea, cantidad, detalle, precio, idproducto) VALUES ($idpedido, $nrolinea, $cantidad, '$detalle', $precio, $idproducto)";
+		Ejecutar($sql);
+	
+	}
+
+	function cantLineasPedido($idpedido){
+		$sql="SELECT nrolinea FROM pedidolineas WHERE idpedido=$idpedido";
+		$rs = Ejecutar($sql);
+		
+		return mysqli_num_rows($rs);
+	}
 
 	//end
+	function getPedidoActual($user){
+		$resu = array();
+		
+		$sql = "SELECT id_pedido FROM pedido WHERE usuario='".$user."' AND p.confirmado=0 ";
+		$rs = Ejecutar($sql);
+	
+		while($reg = mysqli_fetch_array($rs)){
+			$resu = $reg;
+			
+		}//wend
+		if (count($resu)==0){
+			$sql="INSERT INTO pedido (total, fecha, confirmado, usuario) VALUES (0,NOW(),0,'$user')";
+			Ejecutar($sql);
+			$resu=getPedidoActual($user);
+			
+		} 
+		return $resu;
+	}
 
+
+	function getProducto($idProducto){
+		$resu = array();
+		
+		$sql = "SELECT precio, nombre, stock FROM producto WHERE id_producto=".$idProducto;
+		$rs = Ejecutar($sql);
+	
+		while($reg = mysqli_fetch_array($rs)){
+			$resu = $reg;
+			
+		}//wend
+		return $resu;
+	}
 
 	function exists($user)
 	{
