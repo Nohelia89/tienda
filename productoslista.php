@@ -35,14 +35,19 @@
 		<title>Index</title>
 	
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+		<script type="text/javascript" src="js/position.js"></script>
+		<script type="text/javascript" src="js/efectos.js"></script>
+		<script type="text/javascript" src="js/productos.js"></script>
 	
 		<script type="text/javascript">
 			function buscarPorCategoria()
 			{
 				var cmbFil = document.getElementById("comboCategorias");
 				var sele = cmbFil.options[cmbFil.selectedIndex].id;
-				window.location = "principal.php?categoria=" + sele;
+				window.location = "productoslista.php?categoria=" + sele;
 			}
 		</script>
 	</head>
@@ -68,10 +73,10 @@
 						<a class="nav-link" href="">Perfil</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="carrito.php">Mi Carrito</a>
+						<a class="nav-link" href="">Mi Carrito</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="historial.php">Mis Compras</a>
+						<a class="nav-link" href="">Mis Compras</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
@@ -80,67 +85,62 @@
 				  </div>
 				</div>
 			  </nav>
-				<?php
-				if($_SESSION["esadmin"])
-				{
-				  echo "<div width='100%' head='300px' style='position:relative; display:block; padding:20px;'>
-							<nav class='navbar navbar-expand-lg navbar-light bg-light'>
-								<div class='container-fluid'>
-								  <a class='navbar-brand' href='#'></a>
-								  <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
-									<span class='navbar-toggler-icon'></span>
-								  </button>
-								  <div class='collapse navbar-collapse' id='navbarNav'>
-									<ul class='navbar-nav'>
-									  <li class='nav-item'>
-										<a class='nav-link' href=''>Administracion:</a>
-									  </li>
-									  <li class='nav-item'>
-										<a class='nav-link' href='productoslista.php'>Listado de Productos</a>
-									  </li>
-									</ul>
-								  </div>
-								</div>
-							</nav>
-						</div>";
-				}
-				?>
+			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
+					<nav class="navbar navbar-expand-lg navbar-light bg-light">
+						<div class="container-fluid">
+						  <a class="navbar-brand" href="#"></a>
+						  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						  </button>
+						  <div class="collapse navbar-collapse" id="navbarNav">
+							<ul class="navbar-nav">
+							  <li class="nav-item">
+								<a class="nav-link" href="">Administración:</a>
+							  </li>
+							  <li class="nav-item">
+								<a class="nav-link" href="">Listado de Productos</a>
+							  </li>
+							</ul>
+						  </div>
+						</div>
+				  </nav>
+			  </div>
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
 				<span style="margin:10px;">Categoria:</span><span style="margin:10px;"><?php echo comboCategorias($idCategoria); ?></span>
 				<input type="button" value="Buscar" onclick="buscarPorCategoria();" />
+				<input type="checkbox" id="chkActivo" checked="true" style="margin-left:10px;" /><span style="margin-left:10px;">Activos</span>
+			  </div>
+			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
+				<input type="button" value="Nuevo producto" onclick="window.location='altaproducto.php';" />
+				<input type="button" value="Editar producto" onclick="ModiProducto();" />
 			  </div>
 		</header>
 		
-		<div class="row row-cols-1 row-cols-md-3 g-4" >
-			
-			<?php
-				$productos = listar($idCategoria);
-				
-				for($i=0; $i<count($productos); $i++)
-				{
-					$html = "<div class='col'>
-								<div class='card h-100' style='display: table; padding: 20px;'>";
-					
-					$imagenes = listarImagenes($productos[$i]['id_producto']);
-					for($ii=0; $ii<count($imagenes); $ii++)
-					{
-						$html = $html."<div style='position: relative; float: left;'>";
-						$html = $html."<img src='./imagenes/".$imagenes[$ii][0]."' class='img-fluid' style='width: 140px; height: 110px; padding: 5px;' alt='...' />";
-						$html = $html."</div>";
-					}
-					
-					$html = $html."<div class='card-body'>
-									<h5 class='card-title'>Producto: ".$productos[$i]['nombre']."</h5>
-									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
-									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
-									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
-									</div>
-									</div>
-								</div>";
-					echo $html;
-				}
-			?>
-		  </div>
+		<div id="divContenido" style="overflow-y:scroll;">
+			<table id="tabProductos">
+				<tr id="trHead">
+					<td onclick="OrderProducto('codigouser');">Código</td>
+					<td onclick="OrderProducto('descripcion');">Descripción</td>
+					<td onclick="OrderProducto('origen');">Stock</td>
+					<td onclick="OrderProducto('precio');">Precio</td>
+					<td onclick="OrderProducto('marca');">Categoria</td>
+				</tr>
+				<?php
+					$rs = listar($idCategoria);
+					for($i=0;$i<count($rs);$i++){
+						$str = "";
+						$str = "<tr onmouseover='RegOver(true,this)' onmouseout='RegOver(false,this)' onclick='SelectProducto(this);' ondblclick='SelectProducto(this);ModiProducto();'>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['id_producto']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td>".$rs[$i]['nombre']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td>".$rs[$i]['stock']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td align='right'>$"."  ".$rs[$i]['precio']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['categoria']."</td>\n";
+						$str.= "\t\t\t\t\t</tr>\n";
+						echo $str;
+					}//next
+				?>
+			</table>
+		</div>
 
 		<footer>
 

@@ -106,6 +106,7 @@
 									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
 									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
 									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
+									<p class='card-text'>Codigo: ".$productos[$i]['id_producto']."</p>
 									</div>
 									</div>
 								</div>";

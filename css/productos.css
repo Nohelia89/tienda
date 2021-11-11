@@ -1,0 +1,101 @@
+#divHead{
+	margin-top:5px;
+	height:55px;
+	background-color:#0B0B0B;
+	padding:10px;
+}
+#cmbMarcas{
+	font-family:arial;
+	font-size:10pt;
+	border:outset 1px #AA2222;
+	width:162px;
+	visibility:hidden;
+	color:#662222;
+}
+#cmbFilProducto{
+	font-family:arial;
+	font-size:10pt;
+	border:outset 1px #AA2222;
+	width:162px;
+	color:#662222;
+}
+#tabProd input{
+	font-family:arial;
+	font-size:10pt;
+	border:outset 1px #AA2222;
+	color:#662222;
+	width:200px;
+	height:18px;
+}
+#tabProd{
+	border:solid 1px #AA2222;
+	width:100%;
+}
+#tabProductos{
+	width:100%;
+}
+#tabFiltro{
+	border:solid 1px #CC5522;
+	width:100%;
+}
+#tabProd td{
+	font-family:arial;
+	font-size:8pt;
+	color:#662222;
+}
+#tabProductos td{
+	padding:5px;
+	font-family:arial;
+	font-size:10pt;
+	color:#666666;
+}
+#tabProductos tr{
+	background-color:#FFFFFF;
+	cursor:pointer;
+}
+#trHead td{
+	padding: 5px;
+	font-size:12pt;
+	font-weight:bold;
+	background-color:#EEEEEE;
+	text-align:center;
+	color:#999999;
+	cursor:s-resize;
+}
+#trBuscar td{
+	font-family:arial;
+	font-size:9pt;
+	font-weight:bold;
+	background-color:#000000;
+	text-align:center;
+	color:#FFFFFF;
+}
+#inpCodigo{
+	width:80px;
+}
+#inpId{
+	width:55px;
+}
+#inpDescripcion{
+	width:320px;
+}
+#inpPrecio{
+	width:80px;
+	text-align:right;
+	font-weight:bold;
+}
+#inpOrigen{
+	width:160px;
+}
+#chkActivo{
+	cursor:pointer;
+}
+#divContenido{
+	text-align: center;
+	margin-top:5px;
+	margin-left:50px;
+	height:500px;
+	width: 60%;
+	background-color:#GGGGGG;
+	padding:10px;
+}

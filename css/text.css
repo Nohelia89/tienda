@@ -1,0 +1,87 @@
+.cNovedades{
+	font-family:impact;
+	font-size:18pt;
+	color:#CC5522;
+}
+.cImgNovedades{
+	border:none;
+	margin-left:15px;
+	width:160px;
+	height:100px;
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	cursor:pointer;
+	z-index:-1;
+}
+.cTexNovedades{
+	text-align:center;
+	font-family:arial;
+	font-size:8pt;
+	background-color:#000000;
+	color:#CCAA00;
+	border:none;
+	margin-left:15px;
+	width:160px;
+	height:20px;
+	z-index:-1;
+}
+.cPie{
+	text-align:left;
+	font-family:arial;
+	font-size:8pt;
+	color:#FFFFFF;
+	height:10px;
+}
+.cFirma{
+	font-family:verdana;
+	font-size:6pt;
+	color:#CCAA00;
+	height:10px;
+}
+.cLogueo{
+	font-family:arial;
+	font-size:9pt;
+	color:#FFFFFF;
+	text-align:right;
+}
+.cBtn{
+	margin-top:5px;
+	margin-left:15px;
+	font-family:arial;
+	font-size:8pt;
+	font-weight:bold;
+	color:#000000;
+	/*height:100%;*/
+	border:outset #775555;
+	background-color:#CCCCCC;
+	width:100px;
+	cursor:pointer;
+}
+.cUserlog{
+	font-family:arial;
+	font-size:9pt;
+	color:#FFFFFF;
+}
+.cBtns{
+	font-family:arial;
+	font-size:8pt;
+	font-weight:bold;
+	color:#000000;
+	border:outset 2px #550000;
+	background-color:#BBAAAA;
+	width:130px;
+	cursor:pointer;
+}
+.cRutaNav{
+	margin-left:5px;
+	color:#FFFFFF;
+	font-family:arial;
+	font-size:8pt;
+}
+.cTextBox{
+	font-family:arial;
+	font-size:10pt;
+	border:outset 1px #AA2222;
+	color:#662222;
+	height:18px;
+}

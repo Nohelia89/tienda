@@ -16,7 +16,7 @@
 	
 	function listar($idCategoria){
 		$resu = array();
-		$sql = "SELECT id_producto, nombre, descripcion, precio, stock FROM producto WHERE activo=1";
+		$sql = "SELECT id_producto, nombre, descripcion, precio, stock, categoria FROM producto WHERE activo=1";
 		if($idCategoria>0)
 		{
 			$sql = $sql." AND categoria=$idCategoria";
