@@ -31,4 +31,15 @@
 		mysqli_close($con);
 		return $result;
 	}//end
+	
+	function EjecutarConexion($con, $sql){
+		$result = mysqli_query($con, $sql);
+		return $result;
+	}//end
+	
+	function Desconectar($con){
+		if($con!=null){
+			mysqli_close($con);
+		}
+	}//end
 ?>

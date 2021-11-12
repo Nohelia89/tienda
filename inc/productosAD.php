@@ -1,25 +1,39 @@
 <?php
 	include("conex.php");
 		
-	function guardar($id, $nom, $descripcion, $precio, $stock, $activo, $imagenes){
-
-		$link = Conectarse();				
-		$sql = "insert into producto(id_producto, nombre, descripcion, precio, stock, activo) VALUES ($id,'$nom','$descripcion',$precio,$stock,$activo)";
-		mysqli_query($link, $sql);
+	function guardar($id, $nom, $descripcion, $precio, $stock, $activo, $categoria, $imagenes){
 		
+		$sql = "insert into producto(id_producto, nombre, descripcion, precio, stock, activo, categoria) VALUES ($id,'$nom','$descripcion',$precio,$stock,$activo,$categoria)";
+		$con = Conectar();
+		EjecutarConexion($con, $sql);
 		for ($i=0; $i<count($imagenes); $i++){
 			$sql = "insert into imagenes(id_producto, url_imagen) VALUES ($id,'$imagenes[$i]')";
-			mysqli_query($link, $sql);
+			EjecutarConexion($con, $sql);
 		}	
-		mysqli_close($link);
+		Desconectar($con);
 	}//end
 	
-	function listar($idCategoria){
+	function exists($id){
+		
+		$sql = "SELECT id_producto FROM producto WHERE id_producto=$id";
+		$rs = Ejecutar($sql);
+		
+		if (mysqli_num_rows($rs)>0){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}//end
+	
+	function listar($idCategoria, $activo){
 		$resu = array();
-		$sql = "SELECT id_producto, nombre, descripcion, precio, stock, categoria FROM producto WHERE activo=1";
+		$sql = "SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock, c.nombre as categoria FROM producto p ";
+		$sql = $sql."LEFT JOIN categoria c ON c.id=p.categoria ";
+		$sql = $sql."WHERE p.activo=$activo";
 		if($idCategoria>0)
 		{
-			$sql = $sql." AND categoria=$idCategoria";
+			$sql = $sql." AND p.categoria=$idCategoria";
 		}
 		$rs = Ejecutar($sql);
 		$i = 0;
