@@ -29,7 +29,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 		<meta name="whiteline" content="White Line" />
-
+		<title>White Line</title>
+		
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -37,7 +38,60 @@
 		refresh automatico ->
 		<meta http-equiv="refresh" content="3; URL=index.php" />
 		-->
-		<title>White Line</title>
+		
+		<script type="text/javascript">
+			function GuardarProducto(){
+				var err = false;
+				var msg = "ATENCION!!!\n\nFaltan los siguientes campos:\n";
+				var frm = document.getElementById("frm");
+				
+				cod = frm.txtId.value;
+				nombre = frm.txtNom.value;
+				desc = frm.txtDescripcion.value;
+				stock = frm.txtStock.value;
+				precio = frm.txtPrecio.value;
+				
+				var cmb = document.getElementById("comboCategorias");
+				categoria = cmb.options[cmb.selectedIndex].id;
+				
+				if(cod.trim()==""){
+					cod = frm.txtId.value;
+					frm.txtId.value = cod;
+					//msg = msg +"-Codigo\n";
+					//err = true;
+				}//endif
+				if(nombre.trim()==""){
+					msg = msg +"-Nombre\n";
+					err = true;
+				}//endif
+				if(desc.trim()==""){
+					msg = msg +"-Descripción\n";
+					err = true;
+				}//endif
+				if(stock.trim()==""){
+					msg = msg +"-Stock\n";
+					err = true;
+				}//endif
+				if(precio.trim()==""){
+					msg = msg +"-Precio\n";
+					err = true;
+				}//endif
+				if(categoria=="0"){
+					msg = msg +"-Categoria\n";
+					err = true;
+				}//endif
+				
+				if(!err){
+					frm.action = "newproduct.php?categoria=" + categoria;
+					if(confirm("¿Desea guardar los datos?")){
+						frm.submit();
+					}//endif
+				}else{
+					alert(msg);
+				}//endif
+				
+			}//end
+		</script>
 		
 		<style > 
     
@@ -116,24 +170,24 @@
         <section>
             <div class="container">
                 <div class="card card-container" style="padding:30px;">
-                    <form class="form-horizontal" action="newproduct.php" method="POST" enctype="multipart/form-data">
+                    <form id="frm" class="form-horizontal" action="newproduct.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label class="control-label col-sm-12" for="txtId">Id:</label>
+                            <label class="control-label col-sm-12" for="txtId">Código:</label>
                             <div class="col-sm-12">
-                                <input type="number" class="form-control" id="txtId" name="txtId" placeholder="Ingresar Id">
+                                <input type="number" class="form-control" id="txtId" name="txtId" placeholder="Ingresar Código">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-sm-12" for="pwd">Nombre:</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" id="txtNom" name="txtNom" placeholder="Ingresar nombre">
+                                <input type="text" class="form-control" id="txtNom" name="txtNom" placeholder="Ingresar Nombre">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-12" for="txtDescripcion">Descripcion:</label>
                             <div class="col-sm-12">
-                            <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion" placeholder="Ingresar descripcion">
+                            <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion" placeholder="Ingresar Descripcion">
                             </div>
                         </div>
                         <div class="form-group">
@@ -149,7 +203,7 @@
                             </div>
                         </div>
 						<div class="form-group">
-                            <label class="control-label col-sm-12" for="txtStock">Categoria:</label>
+                            <label class="control-label col-sm-12" for="comboCategorias">Categoria:</label>
                             <div class="col-sm-12">
 								<?php echo comboCategorias(0); ?>
                             </div>
@@ -159,11 +213,9 @@
 							<input class="form-control" type="file" id="formFileMultiple" name="img[]" multiple>
 						</div>
                         
-                        
-
                         <div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
                             <div class="col-sm-6">
-                                <button type="submit" id="btmProducto" class="btn btn-primary">Guardar</button>
+                                <button type="button" id="btmProducto" class="btn btn-primary" onclick="GuardarProducto();">Guardar</button>
                             </div>
                         </div>
                     </form> 

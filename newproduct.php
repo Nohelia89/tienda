@@ -2,21 +2,22 @@
 
 	include("inc/productosAD.php");
 
+	$categoria=$_GET['categoria'];
 	$id=$_POST['txtId'];
 	$nom=$_POST['txtNom'];
 	$descripcion=$_POST['txtDescripcion'];
 	$precio=$_POST['txtPrecio'];
 	$stock=$_POST['txtStock'];
 
-
-	/*
-	$img1=$_FILES['txtImagen1']['name'];
-	$img2=$_FILES['txtImagen1']['name'];
-	$img3=$_FILES['txtImagen1']['name'];
-	*/
-	
+	$activo = 0;
 	if ($stock > 0) {
 		$activo = 1;
+	}
+	
+	if(exists($id))
+	{
+		header("Location: pageerror.php?err=prodex&pag=altaproducto.php");
+		exit();
 	}
 	
 	if (isset($_FILES['img'])){
@@ -35,7 +36,7 @@
 			else $validar=false;
 		}
 	}
-
 	
-	guardar($id, $nom, $descripcion, $precio, $stock, $activo, $imagenes);
+	guardar($id, $nom, $descripcion, $precio, $stock, $activo, $categoria, $imagenes);
+	header("Location: productoslista.php");
 ?>

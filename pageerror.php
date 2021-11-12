@@ -6,6 +6,9 @@
 		case "userex":
 			$msg = "El nombre de usuario ya existe.";
 			break;
+		case "prodex":
+			$msg = "El código de producto ingresado ya existe.";
+			break;
 		case "usercar":
 			$msg = "El nombre de usuario contiene caracteres no permitidos.";
 			break;
