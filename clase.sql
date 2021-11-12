@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2021 a las 18:31:23
+-- Tiempo de generación: 12-11-2021 a las 20:16:12
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (1, 'Varios'),
-(2, 'Heladeras');
+(2, 'Heladeras'),
+(3, 'Lavarropas');
 
 -- --------------------------------------------------------
 
@@ -58,7 +59,9 @@ CREATE TABLE `imagenes` (
 INSERT INTO `imagenes` (`id_producto`, `url_imagen`) VALUES
 (12312, '12312_0.jpg'),
 (12312, '12312_1.jpg'),
-(12312, '12312_2.jpg');
+(12312, '12312_2.jpg'),
+(2, '2_0.jpg'),
+(3, '3_0.jpg');
 
 -- --------------------------------------------------------
 
@@ -110,6 +113,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `activo`, `categoria`) VALUES
+(1, 'Heladera 2000', 'asdas asdas asdasdasd', 8500.00, 15, '1', 2),
+(2, 'Lavarropas hp10', 'asdasdasdasd12312312312', 10500.00, 10, '1', 3),
+(3, 'Perchero', 'asd', 150.00, 10, '1', 1),
 (12312, 'asfsad', 'asdfas', 21312.00, 213123, '1', 0);
 
 -- --------------------------------------------------------
@@ -134,7 +140,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`documento`, `password`, `nombre`, `apellido`, `email`, `direccion`, `esadmin`) VALUES
 ('1', '1', 'Nohelia', '1', 'as', '1', 0),
-('12345', 'asd', 'juan', 'sadf', 'asd', 'asd', 0);
+('12345', 'asd', 'juan', 'sadf', 'asd', 'asd', 0),
+('admin', 'admin', 'Administrador', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -229,7 +236,7 @@ ALTER TABLE `ventalineas`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
