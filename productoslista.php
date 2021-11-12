@@ -16,10 +16,15 @@
 		exit();
 	}
 	
+	$activo = 1;
 	$idCategoria=0;
 	if(isset($_GET["categoria"]))
 	{
 		$idCategoria = $_GET["categoria"];
+	}
+	if(isset($_GET["act"]))
+	{
+		$activo = $_GET["act"];
 	}
 ?>
 
@@ -47,7 +52,13 @@
 			{
 				var cmbFil = document.getElementById("comboCategorias");
 				var sele = cmbFil.options[cmbFil.selectedIndex].id;
-				window.location = "productoslista.php?categoria=" + sele;
+				var activo;
+				if(document.getElementById("chkActivo").checked){
+					activo = "1";
+				}else{
+					activo = "0";
+				}//endif
+				window.location = "productoslista.php?categoria=" + sele + "&act=" + activo;
 			}
 		</script>
 	</head>
@@ -67,7 +78,7 @@
 						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="">Productos</a>
+						<a class="nav-link" href="index.php">Productos</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="">Perfil</a>
@@ -98,7 +109,7 @@
 								<a class="nav-link" href="">Administración:</a>
 							  </li>
 							  <li class="nav-item">
-								<a class="nav-link" href="">Listado de Productos</a>
+								<a class="nav-link" href="productoslista.php">Listado de Productos</a>
 							  </li>
 							</ul>
 						  </div>
@@ -108,7 +119,7 @@
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
 				<span style="margin:10px;">Categoria:</span><span style="margin:10px;"><?php echo comboCategorias($idCategoria); ?></span>
 				<input type="button" value="Buscar" onclick="buscarPorCategoria();" />
-				<input type="checkbox" id="chkActivo" checked="true" style="margin-left:10px;" /><span style="margin-left:10px;">Activos</span>
+				<input type="checkbox" id="chkActivo" <?php if($activo=="1") echo "checked='true'"; ?> style="margin-left:80px;" /><span style="margin-left:10px;">Activos</span>
 			  </div>
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
 				<input type="button" value="Nuevo producto" onclick="window.location='altaproducto.php';" />
@@ -120,13 +131,13 @@
 			<table id="tabProductos">
 				<tr id="trHead">
 					<td onclick="OrderProducto('codigouser');">Código</td>
-					<td onclick="OrderProducto('descripcion');">Descripción</td>
+					<td onclick="OrderProducto('descripcion');">Nombre</td>
 					<td onclick="OrderProducto('origen');">Stock</td>
 					<td onclick="OrderProducto('precio');">Precio</td>
 					<td onclick="OrderProducto('marca');">Categoria</td>
 				</tr>
 				<?php
-					$rs = listar($idCategoria);
+					$rs = listar($idCategoria, $activo);
 					for($i=0;$i<count($rs);$i++){
 						$str = "";
 						$str = "<tr onmouseover='RegOver(true,this)' onmouseout='RegOver(false,this)' onclick='SelectProducto(this);' ondblclick='SelectProducto(this);ModiProducto();'>\n";

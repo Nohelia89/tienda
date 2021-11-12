@@ -62,7 +62,7 @@
 						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="">Productos</a>
+						<a class="nav-link" href="index.php">Productos</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="">Perfil</a>
@@ -114,7 +114,7 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4" >
 			
 			<?php
-				$productos = listar($idCategoria);
+				$productos = listar($idCategoria, 1);
 				
 				for($i=0; $i<count($productos); $i++)
 				{
