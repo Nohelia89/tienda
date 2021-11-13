@@ -22,32 +22,6 @@ function CamposOff(){
 function CamposOn(){
 }//end
 
-function GuardarMarca(alta){
-	var err = false;
-	var msg = "ATENCION!!!\n\nFaltan los siguientes campos:\n";
-	var frm = document.getElementById("frm");
-	
-	//cod = frm.inpCodigo.value;
-	nombre = frm.inpNombre.value;
-	
-	if(nombre.trim()==""){
-		msg = msg +"- Nombre\n";
-		err = true;
-	}//endif
-	if(!err){
-		if(alta){
-			frm.action = "php/insmarc.php?u="+ UserLog +"&p="+ PassLog;
-		}else{
-			frm.action = "php/updmarc.php?u="+ UserLog +"&p="+ PassLog +"&id="+ IdMarc;
-		}//endif
-		if(confirm("¿Desea guardar los datos?")){
-			frm.submit();
-		}//endif
-	}else{
-		alert(msg);
-	}//endif
-}//end
-
 function ActivarOnOff(){
 	var ob = document.getElementById("hidActivo");
 	if(document.getElementById("chkActivo").checked){
@@ -57,14 +31,14 @@ function ActivarOnOff(){
 	}//endif
 }//end
 
-function SelectMarca(obj){
+function SelectCategoria(obj){
 	var i;
-	var tab = document.getElementById("tabMarcas");
+	var tab = document.getElementById("tabProductos");
 	for(i=0;i<tab.rows.length;i++){
 		var tr = tab.rows[i];
 		tr.style.backgroundColor = "#FFFFFF";
 	}//next
-	obj.style.backgroundColor = "#CC5522";
+	obj.style.backgroundColor = "#BBBBDD";
 	var td = obj.cells[0];
 	RowId = td.innerHTML;
 }//end
@@ -78,12 +52,12 @@ function setChkActivo(v){
 	}//endif
 }//end
 
-function ModiMarca(){
+function ModiCategoria(){
 	if(RowId!=0){
-		window.location = "marcaedi.php?u="+ UserLog +"&p="+ PassLog +"&cod="+ RowId;
+		window.location = "editarcategoria.php?id="+ RowId;
 		//alert(RowId);
 	}else{
-		alert("Debe seleccionar una Marca.");
+		alert("Debe seleccionar una categoria.");
 	}//endif
 }//end
 
