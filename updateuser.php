@@ -11,6 +11,10 @@
 
 	
 	updateUser($id, $pass, $nom, $ape, $mail, $dir);
-	header("Location:index.php");	
+	session_start();
+	$_SESSION["usuario"]=$nom;
+
+	header("Location: index.php");
+	
 	
 ?>
