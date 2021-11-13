@@ -134,6 +134,7 @@
 									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
 									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
 									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
+									<input type='button' value='Detallado' onclick='window.location=\"productoDetallado.php?producto=".$productos[$i]['id_producto']."\"'</>
 									</div>
 									</div>
 								</div>";
