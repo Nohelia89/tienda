@@ -12,5 +12,5 @@
 	
 	insertarVenta($idpedido, $pedido["cabezal"]["total"], $pedido["cabezal"]["usuario"], $pedido["lineas"]);
 	
-	header("Location: pagemsg.php?err=ventaok&pag=index.php");
+	header("Location: pagemsg.php?msg=ventaok&pag=feedback.php");
 ?>
