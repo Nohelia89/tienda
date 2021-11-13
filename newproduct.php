@@ -28,8 +28,8 @@
 			//Comprobamos si el fichero es una imagen
 			if ($_FILES['img']['type'][$i]=='image/png' || $_FILES['img']['type'][$i]=='image/jpeg'){		
 				//Subimos el fichero al servidor
-			//	echo $_FILES["img"]["name"][$i];
-			$imagenes[$i]=$id."_".$i.".jpg";
+				//	echo $_FILES["img"]["name"][$i];
+				$imagenes[$i]=$id."_".$i.".jpg";
 				move_uploaded_file($_FILES["img"]["tmp_name"][$i], "imagenes/".$id."_".$i.".jpg");
 				$validar=true;
 			}

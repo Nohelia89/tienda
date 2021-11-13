@@ -78,66 +78,6 @@ function ControlPrecio(e){
 	*/
 }//end
 
-function GuardarProducto(alta){
-	var err = false;
-	var msg = "ATENCION!!!\n\nFaltan los siguientes campos:\n";
-	var frm = document.getElementById("frm");
-	
-	cod = frm.inpCodigo.value;
-	desc = frm.inpDescripcion.value;
-	origen = frm.inpOrigen.value;
-	precio = frm.inpPrecio.value;
-	
-	var cmb = document.getElementById("cmbMarcas");
-	marca = cmb.options[cmb.selectedIndex].id;
-	
-	if(cod.trim()==""){
-		cod = frm.inpId.value;
-		frm.inpCodigo.value = cod;
-		//msg = msg +"-Codigo\n";
-		//err = true;
-	}//endif
-	if(desc.trim()==""){
-		msg = msg +"-Descripción\n";
-		err = true;
-	}//endif
-	if(origen.trim()==""){
-		msg = msg +"-Origen\n";
-		err = true;
-	}//endif
-	if(precio.trim()==""){
-		msg = msg +"-Precio\n";
-		err = true;
-	}//endif
-	if(marca=="0"){
-		msg = msg +"-Marca\n";
-		err = true;
-	}//endif
-	
-	if(!err){
-		if(alta){
-			frm.action = "php/insprod.php?u="+ UserLog +"&p="+ PassLog +"&marca="+ marca;
-		}else{
-			frm.action = "php/updprod.php?u="+ UserLog +"&p="+ PassLog +"&marca="+ marca +"&cod="+ Codigo;
-		}//endif
-		if(confirm("¿Desea guardar los datos?")){
-			frm.submit();
-		}//endif
-	}else{
-		alert(msg);
-	}//endif
-	
-}//end
-
-function ActivarOnOff(){
-	var ob = document.getElementById("hidActivo");
-	if(document.getElementById("chkActivo").checked){
-		ob.value = "1";
-	}else{
-		ob.value = "0";
-	}//endif
-}//end
-
 function SelectFiltro(){
 	var cmbMarcas = document.getElementById("cmbMarcas");
 	var cmbFil = document.getElementById("cmbFilProducto");
@@ -228,7 +168,7 @@ function setChkActivo(v){
 
 function ModiProducto(){
 	if(RowId!=0){
-		window.location = "productoedi.php?u="+ UserLog +"&p="+ PassLog +"&cod="+ RowId;
+		window.location = "editarproducto.php?producto="+ RowId;
 		//alert(RowId);
 	}else{
 		alert("Debe seleccionar un producto.");

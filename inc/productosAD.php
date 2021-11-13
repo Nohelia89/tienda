@@ -13,6 +13,12 @@
 		Desconectar($con);
 	}//end
 	
+	function modificar($id, $nom, $descripcion, $precio, $stock, $activo, $categoria){
+		$sql = "UPDATE producto SET nombre='$nom', descripcion='$descripcion', precio=$precio, stock=$stock, activo=$activo, categoria=$categoria ";
+		$sql = $sql."WHERE id_producto=$id";
+		Ejecutar($sql);
+	}//end
+	
 	function exists($id){
 		
 		$sql = "SELECT id_producto FROM producto WHERE id_producto=$id";
@@ -78,4 +84,26 @@
 		$str.= "</select>\n";
 		return $str;
 	}//end
+	
+	function getProducto($id){
+		$resu = array();
+		$sql = "SELECT p.id_producto, p.nombre, p.descripcion, p.precio, p.stock, p.activo, p.categoria FROM producto p ";
+		$sql = $sql."WHERE p.id_producto=$id";
+		$rs = Ejecutar($sql);
+		while($reg = mysqli_fetch_array($rs)){
+			$resu["producto"] = $reg;
+		}//wend
+		$resu["imagenes"] = listarImagenes($id);
+		return $resu;
+	}
+	
+	function eliminarImagen($producto, $imagen){
+		$sql = "DELETE FROM imagenes WHERE id_producto=$producto AND url_imagen='$imagen'";
+		Ejecutar($sql);
+	}
+	
+	function ingresarImagen($producto, $imagen){
+		$sql = "INSERT INTO imagenes(id_producto, url_imagen) VALUES($producto,'$imagen')";
+		Ejecutar($sql);
+	}
 ?>
