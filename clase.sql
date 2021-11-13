@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2021 a las 20:16:12
+-- Tiempo de generación: 13-11-2021 a las 05:40:25
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -58,10 +58,11 @@ CREATE TABLE `imagenes` (
 
 INSERT INTO `imagenes` (`id_producto`, `url_imagen`) VALUES
 (12312, '12312_0.jpg'),
-(12312, '12312_1.jpg'),
-(12312, '12312_2.jpg'),
 (2, '2_0.jpg'),
-(3, '3_0.jpg');
+(3, '3_0.jpg'),
+(1, '1_1.jpg'),
+(1, '1_2.jpg'),
+(1, '1_3.jpg');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,7 @@ INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock
 (1, 'Heladera 2000', 'asdas asdas asdasdasd', 8500.00, 15, '1', 2),
 (2, 'Lavarropas hp10', 'asdasdasdasd12312312312', 10500.00, 10, '1', 3),
 (3, 'Perchero', 'asd', 150.00, 10, '1', 1),
-(12312, 'asfsad', 'asdfas', 21312.00, 213123, '1', 0);
+(12312, 'Producto1', 'aaaaa', 1500.00, 12, '1', 1);
 
 -- --------------------------------------------------------
 
