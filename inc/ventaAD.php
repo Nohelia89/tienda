@@ -13,10 +13,13 @@
 			$sql="SELECT nrolinea, cantidad, precio, detalle, idproducto FROM pedidolineas WHERE idpedido=$id ORDER BY nrolinea";
 			$rs = Ejecutar($sql);
 			$i = 0;
+			$total = 0;
 			while($reg = mysqli_fetch_array($rs)){
 				$resu["lineas"][$i] = $reg;
+				$total= $total + ($resu["lineas"][$i]['cantidad']*$resu["lineas"][$i]['precio']);
 				$i++;
 			}//wend
+			$resu['cabezal']['total'] = $total;
 		}
 		return $resu;
 	}

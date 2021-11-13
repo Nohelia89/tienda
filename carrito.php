@@ -31,6 +31,19 @@
 	
 	
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<script type="text/javascript">
+			function pagarPedido(pedido)
+			{
+				var cmbMetodo = document.getElementById("cmbMetodo");
+				var metodoPago = cmbMetodo.options[cmbMetodo.selectedIndex].id;
+				if(metodoPago == 1){
+					var metodo="Tarjeta";	
+				}else{
+					var metodo="Efectivo";
+				}
+				window.location = "newVenta.php?pedido="+ pedido + "&metodo=" + metodo;
+			}
+		</script>
 	</head>
 	<body>
 		<header>
@@ -80,9 +93,10 @@
 			
 			$lista=getCarrito($_SESSION["documento"]);
 			$total=0;
+			$idPedido=0;
 			for($i=0; $i<count($lista); $i++)
 			{
-
+			$idPedido=$lista[0]['idpedido'];
 			$html="<tr><th scope='row'>".$lista[$i]["nrolinea"]."</th>";
 			$html=$html."<td>".$lista[$i]['detalle']."</td>";
 			$html=$html."<td>".$lista[$i]['cantidad']."</td>";
@@ -93,6 +107,7 @@
 			$total=$total+($lista[$i]['cantidad']*$lista[$i]['precio']);
 			echo $html;
 		}
+
 			
 			?>
 			
@@ -100,6 +115,19 @@
 		  </table>
 	
 		  <span class="nav-link" aria-current="page" >Total: <?php echo $total; ?></span>
+		  <br>
+		  
+		<span>
+
+		<div style="display:flex; flex-direction:row">
+			<button button type="button" id="btmPago" class="btn btn-primary" onclick="pagarPedido(<?php echo $idPedido; ?>);"
+			style="margin-left:10px;">Pagar Pedido</button>
+
+			<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px" class="form-select form-select-sm" aria-label=".form-select-sm example">
+				<option selected id="1">Pagar con tarjeta</option>
+				<option id="0">Pagar en efectivo</option>
+			</select>
+		</div>
 		  
 		<footer>
 

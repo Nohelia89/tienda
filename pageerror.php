@@ -2,22 +2,23 @@
 	
 	$pag = $_GET['pag'];
 	$err = $_GET['err'];
+	$msg = "";
 	
 	switch($err){
 		case "userex":
 			$msg = "El nombre de usuario ya existe.";
 			break;
 		case "prodex":
-			$msg = "El código de producto ingresado ya existe.";
+			$msg = "El cï¿½digo de producto ingresado ya existe.";
 			break;
 		case "prodnot":
-			$msg = "El código de producto no fue encontrado.";
+			$msg = "El cï¿½digo de producto no fue encontrado.";
 			break;
 		case "usercar":
 			$msg = "El nombre de usuario contiene caracteres no permitidos.";
 			break;
 		case "passcar":
-			$msg = "La contraseña contiene caracteres no permitidos.";
+			$msg = "La contraseï¿½a contiene caracteres no permitidos.";
 			break;
 		case "userok":
 			$msg = "Su cuenta ha sido creada correctamente.";
@@ -29,11 +30,15 @@
 			$msg = "Se producido un al ingrsar los datos en el servidor.";
 			break;
 		case "erruser":
-			$msg = "El usuario o la contraseña no es correcta.";
+			$msg = "El usuario o la contraseï¿½a no es correcta.";
 			break;
 		case "elem":
 			$msg = "El elemento seleccionado no existe.";
 			break;
+		case "stock":
+			$msg = "No hay stock para este producto.";
+			break;
+		
 	}//end case
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -56,7 +61,7 @@
 			var pag;
 			function init(p){
 				pag = p;
-				setTimeout("Redirec()",3000);
+				setTimeout("Redirec()",5000);
 			}//end
 			
 			function Redirec(){
