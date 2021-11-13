@@ -33,7 +33,7 @@
 	function getUsuario($user){
 		$arr = array();
 		//$sql = "SELECT documento, nombre, apellido, esadmin FROM usuario WHERE user='".strtoupper($user)."' AND pass='".passEnc(strtoupper($pass))."'";
-		$sql = "SELECT documento, nombre, apellido, password, direccion, mail FROM usuario WHERE documento='".$user"'";
+		$sql = "SELECT documento, nombre, apellido, password, direccion, email FROM usuario WHERE documento='".$user."'";
 		$rs = Ejecutar($sql);
 		while($reg = mysqli_fetch_array($rs)){
 			$arr = $reg;
@@ -45,12 +45,9 @@
 	function updateUser($user,$password, $nombre, $apellido, $email, $direccion ){
 		$arr = array();
 		//$sql = "SELECT documento, nombre, apellido, esadmin FROM usuario WHERE user='".strtoupper($user)."' AND pass='".passEnc(strtoupper($pass))."'";
-		$sql = "UPDATE usuario SET nombre='".$nombre"',"."apellido='".$apellido"',"."password='".$password"',"."direccion='".$direccion"',"."mail='".$mail"' WHERE documento='".$user"'";
+		$sql = "UPDATE usuario SET nombre='".$nombre."',"."apellido='".$apellido."',"."password='".$password."',"."direccion='".$direccion."',"."email='".$email."' WHERE documento='".$user."'";
 		$rs = Ejecutar($sql);
-		while($reg = mysqli_fetch_array($rs)){
-			$arr = $reg;
-		}//wend
-		return $arr;
+		
 	}//end
 
 	function insertUser($documento, $password, $nombre, $apellido, $email, $direccion)

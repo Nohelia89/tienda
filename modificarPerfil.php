@@ -1,3 +1,31 @@
+<?php
+	include("inc/usuariosAD.php");
+	
+	session_start();
+	
+	if(isset($_SESSION["login"]))
+	{
+		if(!$_SESSION["login"]){
+			header("Location: ./index.php");
+			exit();
+		}//endif
+	}
+	else
+	{
+		header("Location: ./index.php");
+		exit();
+	}
+	
+	
+
+	
+	$usuario = getUsuario($_SESSION["documento"]);
+	
+
+	
+?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
@@ -39,38 +67,42 @@
             <div class="container">
                 <div class="card card-container">
                     <form class="form-horizontal" action="updateuser.php" method="POST">
-                       
+						<div class="form-group">
+					
+							<div class="col-sm-12">
+                                <input class="form-control" type="text" hidden id="inpId" class="cTextBox" name="txtId" maxlength="30" value="<?php echo $usuario["documento"]; ?>"> 
+							</div>
 
 						<div class="form-group">
                             <label class="control-label col-sm-12" for="inpPass">Password:</label>
                             <div class="col-sm-12">
-                                <input class="form-control" id="inpPass"  name="txtPass" maxlength="10" type="password" placeholder="Ingresar Password">
+                                <input class="form-control" id="inpPass"  name="txtPass" maxlength="10" type="password" placeholder="Ingresar Password" value="<?php echo $usuario["password"]; ?>">
                             </div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpNom">Nombre:</label>
 							<div class="col-sm-12">
-                                <input class="form-control" type="text" id="inpNom" class="cTextBox" name="txtNom" maxlength="30"placeholder="Ingresar Nombre"> 
+                                <input class="form-control" type="text" id="inpNom" class="cTextBox" name="txtNom" maxlength="30" placeholder="Ingresar Nombre" value="<?php echo $usuario["nombre"]; ?>"> 
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpApe">Apellido:</label>
 							<div class="col-sm-12">
-                                <input class="form-control" type="text" id="inpApe" class="cTextBox" name="txtApe" maxlength="30" placeholder="Ingresar Apellido">
+                                <input class="form-control" type="text" id="inpApe" class="cTextBox" name="txtApe" maxlength="30" placeholder="Ingresar Apellido" value="<?php echo $usuario["apellido"]; ?>">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpDir">Dirección:</label>
 							<div class="col-sm-12">
-                                <input class="form-control" type="text" id="inpDir" class="cTextBox" name="txtDir" maxlength="20" placeholder="Ingresar Dirección">
+                                <input class="form-control" type="text" id="inpDir" class="cTextBox" name="txtDir" maxlength="20" placeholder="Ingresar Dirección" value="<?php echo $usuario["direccion"]; ?>">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpMail">Mail:</label>
 							<div class="col-sm-12">
-                                <input class="form-control" type="text" id="inpMail" class="cTextBox" name="txtMail" maxlength="40" placeholder="Ingresar Mail">
+                                <input class="form-control" type="text" id="inpMail" class="cTextBox" name="txtMail" maxlength="40" placeholder="Ingresar Mail" value="<?php echo $usuario["email"]; ?>">
 							</div>
 						</div>
 
