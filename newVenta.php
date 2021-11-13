@@ -1,22 +1,16 @@
 <?php
-
 	include("inc/ventaAD.php");
 
-	session_start();
-
-	$idUsuario=$_SESSION["documento"];
-
-	insertVenta($idUsuario)
+	$idpedido = $_GET["pedido"];
+	$pedido = getPedido($idpedido);
 	
-
-	$idpedido=getPedidoActual($idUsuario);
-	$pedido=$idpedido["id_pedido"]
+	if($pedido["cabezal"]<=0)
+	{
+		header("Location: pageerror.php?err=elem&pag=carrito.php");
+		exit();
+	}
 	
-	insertVenta($idUsuario)
+	insertarVenta($idpedido, $pedido["cabezal"]["total"], $pedido["cabezal"]["usuario"], $pedido["lineas"]);
 	
-
-
-	$nrolinea = cantLineasPedido($idpedido[0])+1;
-	insertarProductoPedido($idpedido[0], $nrolinea, $cantidad, $producto['nombre'], $producto['precio'], $idproducto);
-	header("Location:carrito.php");
+	header("Location: pagemsg.php?err=ventaok&pag=index.php");
 ?>

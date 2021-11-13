@@ -1,59 +1,58 @@
 <?php
 	include("conex.php");
 		
-	function getCarrito($user){
+	function getPedido($id){
 		$resu = array();
-		//$sql = "SELECT documento, nombre, apellido, esadmin FROM usuario WHERE user='".strtoupper($user)."' AND pass='".passEnc(strtoupper($pass))."'";
-		$sql = "SELECT l.idpedido, l.nrolinea, l.idproducto, l.detalle, l.cantidad, l.precio  FROM pedidolineas l join pedido p ON p.id_pedido = l.idpedido WHERE p.usuario='".$user."' AND p.confirmado='0' order by l.nrolinea";
+		$sql = "SELECT fecha, total, usuario FROM pedido WHERE id_pedido=$id";
 		$rs = Ejecutar($sql);
-		$i = 0;
 		while($reg = mysqli_fetch_array($rs)){
-			$resu[$i] = $reg;
-			$i++;
+			$resu["cabezal"] = $reg;
 		}//wend
+		
+		if (count($resu)>0){
+			$sql="SELECT nrolinea, cantidad, precio, detalle, idproducto FROM pedidolineas WHERE idpedido=$id ORDER BY nrolinea";
+			$rs = Ejecutar($sql);
+			$i = 0;
+			while($reg = mysqli_fetch_array($rs)){
+				$resu["lineas"][$i] = $reg;
+				$i++;
+			}//wend
+		}
 		return $resu;
 	}
-	function insertarProductoPedido($idpedido, $nrolinea, $cantidad, $detalle, $precio, $idproducto){
 	
+	function insertarVenta($idpedido, $total, $usuario, $lineas)
+	{
 		
-		$sql = "INSERT INTO pedidolineas(idpedido, nrolinea, cantidad, detalle, precio, idproducto) VALUES ($idpedido, $nrolinea, $cantidad, '$detalle', $precio, $idproducto)";
-		Ejecutar($sql);
-	
-	}
+		$sql = "INSERT INTO venta(fechahora, usuario, total, pedido) VALUES(NOW(), '$usuario', $total, $idpedido)";
 
-	function cantLineasPedido($idpedido){
-		$sql="SELECT nrolinea FROM pedidolineas WHERE idpedido=$idpedido";
-		$rs = Ejecutar($sql);
+		$con = Conectar();
+		EjecutarConexion($con, $sql);
 		
-		return mysqli_num_rows($rs);
-	}
-
-	function eliminarProductoPedido($idpedido, $nrolinea){
-	
+		$lastid = mysqli_insert_id($con);
 		
-		$sql = "DELETE FROM pedidolineas WHERE idpedido=".$idpedido." AND nrolinea=".$nrolinea;
-		Ejecutar($sql);
-	
-	}
-
-	//end
-	function getPedidoActual($user){
-		$resu = array();
-		
-		$sql = "SELECT id_pedido FROM pedido WHERE usuario='".$user."' AND confirmado='0' ";
-		$rs = Ejecutar($sql);
-	
-		while($reg = mysqli_fetch_array($rs)){
-			$resu = $reg;
+		if($lastid!=0)
+		{
+			for($i=0; $i<count($lineas); $i++)
+			{
+				$nro = $i + 1;
+				$cantidad = $lineas[$i]["cantidad"];
+				$precio = $lineas[$i]["precio"];
+				$detalle = $lineas[$i]["detalle"];
+				$idprod = $lineas[$i]["idproducto"];
+				
+				$sql = "INSERT INTO ventalineas(idventa, nrolinea, cantidad, precio, detalle, idproducto) ";
+				$sql = $sql."VALUES($lastid, $nro, $cantidad, $precio, $detalle, $idprod)";
+				EjecutarConexion($con, $sql);
+				
+				$sql = "UPDATE producto SET stock = stock-$cantidad WHERE id_producto=$idprod";
+				EjecutarConexion($con, $sql);		
+			}
 			
-		}//wend
-		if (count($resu)==0){
-			$sql="INSERT INTO pedido (total, fecha, confirmado, usuario) VALUES (0,NOW(),'0','$user')";
-			Ejecutar($sql);
-			$resu=getPedidoActual($user);
-			
-		} 
-		return $resu;
+			$sql = "UPDATE pedido SET confirmado='1' WHERE id_pedido=$idpedido";
+			EjecutarConexion($con, $sql);
+		}
+		Desconectar($con);
 	}
 
 
@@ -68,22 +67,6 @@
 			
 		}//wend
 		return $resu;
-	}
-
-	function exists($user)
-	{
-		
-		//$sql = "SELECT documento, nombre, apellido, esadmin FROM usuario WHERE user='".strtoupper($user)."' AND pass='".passEnc(strtoupper($pass))."'";
-		$sql = "SELECT documento, nombre, apellido, esadmin FROM usuario WHERE documento='".$user."'";
-		$rs = Ejecutar($sql);
-		if (mysqli_num_rows($rs)>0){
-			return true;
-		}
-		else {
-			return false;
-		}
-		
-
 	}
 
 
