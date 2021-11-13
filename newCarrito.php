@@ -23,5 +23,5 @@
 	}
 	$nrolinea = cantLineasPedido($idpedido[0])+1;
 	insertarProductoPedido($idpedido[0], $nrolinea, $cantidad, $producto['nombre'], $producto['precio'], $idproducto);
-	header("Location:index.php");
+	header("Location:carrito.php");
 ?>

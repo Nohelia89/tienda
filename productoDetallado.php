@@ -1,7 +1,7 @@
 <?php
 	include("inc/productosAD.php");	
 	
-	
+	session_start();
 	$idproducto=$_GET['producto'];
 	$resultado = getProducto($idproducto);
 	
@@ -12,6 +12,7 @@
     }
     $producto = $resultado["producto"];
     $imagenes = $resultado["imagenes"];
+
 
 
 
@@ -39,6 +40,7 @@
             function EnviarCarrito(prod){
                
 			   var c=document.getElementById("txtCantidad").value;
+			
                 window.location = "newCarrito.php?cantidad="+c+"&producto="+prod;
               
             }

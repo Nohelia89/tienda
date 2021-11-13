@@ -40,7 +40,7 @@
 	function getPedidoActual($user){
 		$resu = array();
 		
-		$sql = "SELECT id_pedido FROM pedido WHERE usuario='".$user."' AND p.confirmado=0 ";
+		$sql = "SELECT id_pedido FROM pedido WHERE usuario='".$user."' AND confirmado='0' ";
 		$rs = Ejecutar($sql);
 	
 		while($reg = mysqli_fetch_array($rs)){
@@ -48,7 +48,7 @@
 			
 		}//wend
 		if (count($resu)==0){
-			$sql="INSERT INTO pedido (total, fecha, confirmado, usuario) VALUES (0,NOW(),0,'$user')";
+			$sql="INSERT INTO pedido (total, fecha, confirmado, usuario) VALUES (0,NOW(),'0','$user')";
 			Ejecutar($sql);
 			$resu=getPedidoActual($user);
 			
