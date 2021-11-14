@@ -17,7 +17,7 @@
 		exit();
 	}
 	
-	$idCategoria=0;
+	$idCategoria=1;
 	if(isset($_GET["categoria"]))
 	{
 		$idCategoria = $_GET["categoria"];
@@ -39,17 +39,27 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	
 		<script type="text/javascript">
-			function buscarPorCategoria()
+			function buscarCategoria(id)
 			{
-				var cmbFil = document.getElementById("comboCategorias");
-				var sele = cmbFil.options[cmbFil.selectedIndex].id;
-				window.location = "principal.php?categoria=" + sele;
+				window.location = "index.php?categoria=" + id;
 			}
 		</script>
+		
+		<style>
+ 			@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+ 			@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+			 .nav-link{
+				color: #;
+				font-family: 'Exo', sans-serif;
+				font-size: 17px;
+				font-weight: Bold;
+			}
+ 		</style>
 	</head>
 	<body>
 		<header>
-			<div class="cbaner">
+			<div class="cbanner">
 			</div>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
@@ -80,45 +90,67 @@
 					</ul>
 				  </div>
 				</div>
-			  </nav>
-				<?php verMenuAdmin(); ?>
-			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<span style="margin:10px;">Categoria:</span><span style="margin:10px;"><?php echo comboCategorias($idCategoria); ?></span>
-				<input type="button" value="Buscar" onclick="buscarPorCategoria();" />
-			  </div>
+			</nav>
+			<?php verMenuAdmin(); ?>
 		</header>
 		
-		<div class="row row-cols-1 row-cols-md-3 g-4" >
-			
+		<section>
+			<div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
 			<?php
-				$productos = listar($idCategoria, 1);
-				
-				for($i=0; $i<count($productos); $i++)
-				{
-					$html = "<div class='col'>
-								<div class='card h-100' style='display: table; padding: 20px;'>";
-					
-					$imagenes = listarImagenes($productos[$i]['id_producto']);
-					for($ii=0; $ii<count($imagenes); $ii++)
-					{
-						$html = $html."<div style='position: relative; float: left;'>";
-						$html = $html."<img src='./imagenes/".$imagenes[$ii][0]."' class='img-fluid' style='width: 140px; height: 110px; padding: 5px;' alt='...' />";
-						$html = $html."</div>";
-					}
-					
-					$html = $html."<div class='card-body'>
-									<h5 class='card-title'>Producto: ".$productos[$i]['nombre']."</h5>
-									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
-									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
-									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
-									<input type='button' value='Detallado' onclick='window.location=\"productoDetallado.php?producto=".$productos[$i]['id_producto']."\"'</>
-									</div>
-									</div>
-								</div>";
-					echo $html;
+				$categorias = listarCategorias();
+
+				$html = "<div style='float:left; padding-right: 80px; margin-top:20px;' >";
+				for($i=0; $i<count($categorias); $i++) {
+					$nombre = $categorias[$i]['nombre'];
+					$id = $categorias[$i]['id'];
+					$html = $html. "<input type='button' class='btn btn-outline-info' value='$nombre' style = ' font-size:20px;
+					font-weight: bold; margin-bottom: 20px; padding:15px; width: 150%; display: block !important; font' onclick='buscarCategoria($id);' />";
 				}
+				$html = $html. "</div>";
+				echo $html;
 			?>
-		  </div>
+			</div>
+			<!--
+			<nav>
+				<ul>
+				  <li><input type="button" value="CATEGORIA 1" /></li>
+				  <li><input type="button" value="CATEGORIA 2" /></li>
+				  <li><input type="button" value="CATEGORIA 3" /></li>
+				  <li><input type="button" value="CATEGORIA 4" /></li>
+				</ul>
+			</nav>
+			-->
+			<div style="display:table; height:100%; padding-left: 20px; padding-right: 20px;">
+				<?php
+
+					$productos = listar($idCategoria, 1);
+					
+					for($i=0; $i<count($productos); $i++) {
+						$html = "<article class='cArticulos'>";
+						$html = $html."<div class='card text-center'>";
+						//$html = $html."<div class='d-flex flex-row flex-wrap mb-3'>";
+						//$html = $html."<div class='card text-center' style='padding: 8px; width: 400px; height: 550px; display: inline-block';>";
+						$imagenes = listarImagenes($productos[$i]['id_producto']);
+						$nomimg = "";
+						if(count($imagenes)>0)
+							$nomimg = "./imagenes/".$imagenes[0][0];
+						
+						$html = $html."<img class='card-img-top' style='margin-left:15px; object-fit: contain; display: table-row; width: 350px; height: 400px'; src='$nomimg' alt='...'>";			
+						$html = $html."<div class='card-body'>";
+						$html = $html."<h5 class='card-title'>".$productos[$i]['nombre']."</h5>";
+						$html = $html."<p class='card-text'> $ ".$productos[$i]['precio']."</p>";
+						$html = $html."<input type='button'  class='btn btn-info' value='Detallado' onclick='window.location=\"productoDetallado.php?producto=".$productos[$i]['id_producto']."\"'</>";	
+						
+						$html = $html."</div>";
+						$html = $html."</div>";
+						//$html = $html."</div>";
+						//$html = $html."</div>";
+						$html = $html."</article>";
+						echo $html;
+					}
+				?>
+			</div>
+		</section>
 
 		<footer>
 
