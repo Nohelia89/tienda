@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
 .table-titulo{
 	padding:5px;
 	font-family:arial;
@@ -60,3 +63,9 @@ ul input{
 	width:300px;
 }
 
+.nav-link{
+	color: #;
+	font-family: 'Exo', sans-serif;
+	font-size: 17px;
+	font-weight: Bold;
+}

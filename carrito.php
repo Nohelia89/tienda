@@ -76,39 +76,12 @@
 	</head>
 	<body>
 		<header>
-			<div class="cbaner">
+			<div class="cbanner">
 			</div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-				  <a class="navbar-brand" href="#"></a>
-				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  </button>
-				  <div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-					  <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="index.php">Productos</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="">Perfil</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="carrito.php">Mi Carrito</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="historial.php">Mis Compras</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
-					  </li>
-					</ul>
-				  </div>
-				</div>
-			  </nav>
-				<?php verMenuAdmin(); ?>
+			<?php
+				verMenu();
+				verMenuAdmin(); 
+			?>
 		</header>
 		
 		<div class="row row-cols-1 row-cols-md-3 g-4" style="padding:100px;">
@@ -140,9 +113,9 @@
 						$html="<tr><th scope='row'>$l</th>";
 						$html=$html."<td>$d</td>";
 						$html=$html."<td id='td$l' width='60'>$c</td>";
-						$html=$html."<td><input type='button' class='btn btn-info' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' /> <input type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
+						$html=$html."<td><input type='button' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' /> <input type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
 						$html=$html."<td>$ $p</td>";
-						$html=$html."<td><input type='button' class='btn btn-info' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
+						$html=$html."<td><input type='button' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
 						$html=$html."</tr>";
 						$total=$total+($c * $p);
 						echo $html;
@@ -155,7 +128,7 @@
 					<label class="table-titulo">Total: <?php echo $total; ?></label>
 				</div>
 				<div style="display:flex; flex-direction:row; justify-content:center;">
-					<button button type="button" id="btmPago" class="btn btn-info" onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
+					<button button type="button" id="btmPago" class="btn btn-primary" onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
 						Pagar Pedido
 					</button>
 					<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px" class="form-select form-select-sm" aria-label=".form-select-sm example">
