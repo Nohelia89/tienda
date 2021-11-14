@@ -1,5 +1,5 @@
 <?php
-	include("inc/productosAD.php");
+	include("inc/usuariosAD.php");
 	include("menuadmin.php");
 	
 	session_start();
@@ -16,12 +16,6 @@
 		header("Location: ./index.php");
 		exit();
 	}
-	
-	$idCategoria=0;
-	if(isset($_GET["categoria"]))
-	{
-		$idCategoria = $_GET["categoria"];
-	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -36,15 +30,15 @@
 		<title>Index</title>
 	
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
+		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	
+		<script type="text/javascript" src="js/position.js"></script>
+		<script type="text/javascript" src="js/efectos.js"></script>
+		<script type="text/javascript" src="js/productos.js"></script>
+	
 		<script type="text/javascript">
-			function buscarPorCategoria()
-			{
-				var cmbFil = document.getElementById("comboCategorias");
-				var sele = cmbFil.options[cmbFil.selectedIndex].id;
-				window.location = "principal.php?categoria=" + sele;
-			}
+			
 		</script>
 	</head>
 	<body>
@@ -69,10 +63,10 @@
 						<a class="nav-link" href="">Perfil</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="carrito.php">Mi Carrito</a>
+						<a class="nav-link" href="">Mi Carrito</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="historial.php">Mis Compras</a>
+						<a class="nav-link" href="">Mis Compras</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
@@ -81,44 +75,34 @@
 				  </div>
 				</div>
 			  </nav>
-				<?php verMenuAdmin(); ?>
-			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<span style="margin:10px;">Categoria:</span><span style="margin:10px;"><?php echo comboCategorias($idCategoria); ?></span>
-				<input type="button" value="Buscar" onclick="buscarPorCategoria();" />
-			  </div>
+			  <?php verMenuAdmin(); ?>
 		</header>
 		
-		<div class="row row-cols-1 row-cols-md-3 g-4" >
-			
-			<?php
-				$productos = listar($idCategoria, 1);
-				
-				for($i=0; $i<count($productos); $i++)
-				{
-					$html = "<div class='col'>
-								<div class='card h-100' style='display: table; padding: 20px;'>";
-					
-					$imagenes = listarImagenes($productos[$i]['id_producto']);
-					for($ii=0; $ii<count($imagenes); $ii++)
-					{
-						$html = $html."<div style='position: relative; float: left;'>";
-						$html = $html."<img src='./imagenes/".$imagenes[$ii][0]."' class='img-fluid' style='width: 140px; height: 110px; padding: 5px;' alt='...' />";
-						$html = $html."</div>";
-					}
-					
-					$html = $html."<div class='card-body'>
-									<h5 class='card-title'>Producto: ".$productos[$i]['nombre']."</h5>
-									<p class='card-text'>Precio: ".$productos[$i]['precio']."</p>
-									<p class='card-text'>Descripcion: ".$productos[$i]['descripcion']."</p>
-									<p class='card-text'>Stock: ".$productos[$i]['stock']."</p>
-									<input type='button' value='Detallado' onclick='window.location=\"productoDetallado.php?producto=".$productos[$i]['id_producto']."\"'</>
-									</div>
-									</div>
-								</div>";
-					echo $html;
-				}
-			?>
-		  </div>
+		<div id="divContenido" style="overflow-y:scroll;">
+			<table id="tabProductos">
+				<tr id="trHead">
+					<td>Documento</td>
+					<td>Nombre</td>
+					<td>Apellido</td>
+					<td>Dirección</td>
+					<td>E-Mail</td>
+				</tr>
+				<?php
+					$rs = listar("");
+					for($i=0;$i<count($rs);$i++){
+						$str = "";
+						$str = "<tr onmouseover='RegOver(true,this)' onmouseout='RegOver(false,this)' onclick='SelectProducto(this);' ondblclick='SelectProducto(this);ModiProducto();'>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['documento']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td>".$rs[$i]['nombre']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td>".$rs[$i]['apellido']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td align='right'>".$rs[$i]['direccion']."</td>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['email']."</td>\n";
+						$str.= "\t\t\t\t\t</tr>\n";
+						echo $str;
+					}//next
+				?>
+			</table>
+		</div>
 
 		<footer>
 

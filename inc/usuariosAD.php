@@ -12,6 +12,21 @@
 		return $arr;
 	}//end
 
+	function listar($filtro)
+	{
+		$resu = array();
+		$sql = "SELECT documento, nombre, apellido, direccion, email FROM usuario ";
+		if($filtro!="") $sql = $sql."WHERE nombre LIKE '%$filtro%' ";
+		$sql = $sql."ORDER BY nombre";
+		
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$resu[$i] = $reg;
+			$i++;
+		}//wend
+		return $resu;
+	}
 
 	function exists($user)
 	{
