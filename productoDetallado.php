@@ -5,7 +5,6 @@
 	session_start();
 	$idproducto=$_GET['producto'];
 	$resultado = getProducto($idproducto);
-	
     if($resultado==null)
     {
         header("Location: ./pageerror.php?err=prodnot&pag=productoslista.php");
@@ -13,6 +12,12 @@
     }
     $producto = $resultado["producto"];
     $imagenes = $resultado["imagenes"];
+	
+	$logueado = false;
+	if(isset($_SESSION["login"]))
+	{
+		$logueado = $_SESSION["login"];
+	}
 ?>
 
 
@@ -106,6 +111,7 @@
 
 				$html = $html. "<div class = 'hijo2' style='padding-left:40px;'>";
 				$html = $html."<h4> ".$producto['nombre']."</h4>";
+				$html = $html."<h5>Código: ".$producto['id_producto']."</h5>";
 				$html = $html."<br> ";
 				$html = $html."<p> Descripcion: ".$producto['descripcion']."</p>";
 				$html = $html."<p> Cantidad en Stock: ".$producto['stock']."</p>";
@@ -114,7 +120,11 @@
 				$html = $html." <p> Cantidad: </p> <input class='form-control' type='number' id='txtCantidad' name='txtCantidad' maxlength='30' value='1' style= 'width:80px;' /> ";
 
 				$html = $html."<br> ";
-				$html = $html. "<input type='button' class='btn btn-info' value='Agregar al Carrito' onclick='EnviarCarrito(".$producto['id_producto'].")' /> ";
+				if($logueado)
+					$html = $html. "<input type='button' class='btn btn-info' value='Agregar al Carrito' onclick='EnviarCarrito(".$producto['id_producto'].")' /> ";
+				else
+					$html = $html. "<input type='button' class='btn btn-info' value='Ingresar' onclick='window.location=\"login.html\";' /> ";
+				
 				$html = $html. "</div>";
 				$html = $html. "</div>";
 				echo $html;
