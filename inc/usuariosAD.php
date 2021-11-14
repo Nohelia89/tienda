@@ -27,6 +27,22 @@
 		}//wend
 		return $resu;
 	}
+	
+	function listarVentas($doc)
+	{
+		$resu = array();
+		$sql = "SELECT fechahora, id, total FROM venta ";
+		$sql = $sql."WHERE usuario='$doc' ";
+		$sql = $sql."ORDER BY fechahora DESC";
+		
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$resu[$i] = $reg;
+			$i++;
+		}//wend
+		return $resu;
+	}
 
 	function exists($user)
 	{

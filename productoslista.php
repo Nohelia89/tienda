@@ -110,6 +110,7 @@
 		</header>
 		
 		<div id="divContenido" style="overflow-y:scroll;">
+			<span class="table-titulo">Lista de Productos</span>
 			<table id="tabProductos">
 				<tr id="trHead">
 					<td onclick="OrderProducto('codigouser');">Código</td>

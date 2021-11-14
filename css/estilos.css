@@ -16,3 +16,10 @@
 .form-group{
 	margin: 5px 20px;
 }
+
+.table-titulo{
+	padding:5px;
+	font-family:arial;
+	font-size:12pt;
+	color:#666666;
+}

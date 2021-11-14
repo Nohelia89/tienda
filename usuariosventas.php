@@ -3,24 +3,19 @@
 	include("menuadmin.php");
 	
 	session_start();
+	validarAdmin();
 	
-	if(isset($_SESSION["login"]))
+	if(!isset($_GET["userid"]))
 	{
-		if(!$_SESSION["login"]){
-			header("Location: ./index.php");
-			exit();
-		}//endif
-	}
-	else
-	{
-		header("Location: ./index.php");
+		header("Location: ./usuarioslista.php");
 		exit();
 	}
 	
-	$filtro="";
-	if(isset($_GET["nom"]))
+	$usuario = $_GET["userid"];
+	$nombre = "";
+	if(isset($_GET["username"]))
 	{
-		$filtro = $_GET["nom"];
+		$nombre = $_GET["username"];
 	}
 ?>
 
@@ -44,19 +39,7 @@
 		<script type="text/javascript" src="js/usuarios.js"></script>
 	
 		<script type="text/javascript">
-			function filtrarUsuarios()
-			{
-				var f = document.getElementById("txtFiltro").value;
-				if(f=="")
-					window.location = "usuarioslista.php";
-				else
-					window.location = "usuarioslista.php?nom=" + f;
-			}
 			
-			function verVentas(documento, nombre)
-			{
-				window.location = "usuariosventas.php?userid=" + documento + "&username=" + nombre;
-			}
 		</script>
 	</head>
 	<body>
@@ -94,41 +77,33 @@
 				</div>
 			  </nav>
 			  <?php verMenuAdmin(); ?>
-			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<span style="margin:10px;">Buscar por nombre:</span>
-				<input id="txtFiltro" value="" style="margin:10px;" />
-				<input type="button" value="Buscar" onclick="filtrarUsuarios();" />
-			  </div>
 		</header>
 		
 		<div id="divContenido" style="overflow-y:scroll;">
-			<span class="table-titulo">Lista de Usuarios</span>
+			<span class="table-titulo">Ventas realizadas a <?php echo $nombre; ?> </span>
 			<table id="tabProductos">
 				<tr id="trHead">
-					<td>Documento</td>
-					<td>Nombre</td>
-					<td>Apellido</td>
-					<td>Dirección</td>
-					<td>E-Mail</td>
-					<td></td>
+					<td>Fecha</td>
+					<td>Nro</td>
+					<td>Total</td>
 				</tr>
 				<?php
-					$rs = listar($filtro);
+					$rs = listarVentas($usuario);
+					$global = 0;
 					for($i=0;$i<count($rs);$i++){
-						$n = $rs[$i]["nombre"];
-						$doc = $rs[$i]["documento"];
-						
+						$f = $rs[$i]["fechahora"];
+						$id = $rs[$i]["id"];
+						$t = $rs[$i]["total"];
+						$global = $global + $t;
 						$str = "";
 						$str = "<tr onmouseover='RegOver(true,this)' onmouseout='RegOver(false,this)' onclick='Seleccionar(this);' ondblclick='Seleccionar(this);'>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>$doc</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>$n</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>".$rs[$i]['apellido']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>".$rs[$i]['direccion']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['email']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='center'><input type='button' value='Ver ventas' onclick='verVentas(\"$doc\", \"$n\");' /></td>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'>$f</td>\n";
+						$str.= "\t\t\t\t\t\t<td>$id</td>\n";
+						$str.= "\t\t\t\t\t\t<td>$ $t</td>\n";
 						$str.= "\t\t\t\t\t</tr>\n";
 						echo $str;
 					}//next
+					echo "<tr><td></td><td></td><td style='font-size:16px;'>Total: $ $global</td></tr>";
 				?>
 			</table>
 		</div>

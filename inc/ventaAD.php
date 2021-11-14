@@ -58,7 +58,6 @@
 		Desconectar($con);
 	}
 
-
 	function getProducto($idProducto){
 		$resu = array();
 		
@@ -71,8 +70,25 @@
 		}//wend
 		return $resu;
 	}
-
-
+	
+	function listarPorFecha($fd, $fh)
+	{
+		$resu = array();
+		
+		$sql = "SELECT v.fechahora, v.id, v.total, v.usuario, concat(u.nombre,' ',u.apellido) as nombre ";
+		$sql = $sql."FROM venta v ";
+		$sql = $sql."JOIN usuario u ON u.documento=v.usuario ";
+		$sql = $sql."WHERE date(v.fechahora) BETWEEN '$fd' AND '$fh' ";
+		$sql = $sql."ORDER BY fechahora DESC";
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$resu[$i] = $reg;
+			$i++;
+		}//wend
+		
+		return $resu;
+	}
 ?>
 
 

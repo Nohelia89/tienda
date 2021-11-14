@@ -1,4 +1,27 @@
 <?php
+
+	function validarAdmin()
+	{
+		if(isset($_SESSION["login"]))
+		{
+			if(!$_SESSION["login"]){
+				header("Location: ./index.php");
+				exit();
+			}//endif
+			
+			if(!$_SESSION["esadmin"])
+			{
+				header("Location: ./index.php");
+				exit();
+			}
+		}
+		else
+		{
+			header("Location: ./index.php");
+			exit();
+		}
+	}
+
 	function verMenuAdmin()
 	{
 		if(isset($_SESSION["esadmin"]))
@@ -15,7 +38,7 @@
 									  <div class='collapse navbar-collapse' id='navbarNav'>
 										<ul class='navbar-nav'>
 										  <li class='nav-item'>
-											<a class='nav-link' href=''>Administracion:</a>
+											<a class='nav-link' href=''>Administración:</a>
 										  </li>
 										  <li class='nav-item'>
 											<a class='nav-link' href='productoslista.php'>Listado de Productos</a>
@@ -25,6 +48,9 @@
 										  </li>
 										  <li class='nav-item'>
 											<a class='nav-link' href='usuarioslista.php'>Lista de Usuarios</a>
+										  </li>
+										  <li class='nav-item'>
+											<a class='nav-link' href='histoventas.php'>Histo Ventas</a>
 										  </li>
 										</ul>
 									  </div>

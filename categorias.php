@@ -83,6 +83,7 @@
 		</header>
 		
 		<div id="divContenido" style="overflow-y:scroll;">
+			<span class="table-titulo">Categorias</span>
 			<table id="tabProductos">
 				<tr id="trHead">
 					<td>ID</td>

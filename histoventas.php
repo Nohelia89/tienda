@@ -1,27 +1,21 @@
 <?php
-	include("inc/usuariosAD.php");
+	include("inc/ventaAD.php");
 	include("menuadmin.php");
 	
 	session_start();
 	
-	if(isset($_SESSION["login"]))
+	validarAdmin();
+	
+	$fd = date("Y-m-d");
+	$fh = date("Y-m-d");
+	
+	if(isset($_GET["fd"]))
 	{
-		if(!$_SESSION["login"]){
-			header("Location: ./index.php");
-			exit();
-		}//endif
-	}
-	else
-	{
-		header("Location: ./index.php");
-		exit();
+		$fd = $_GET["fd"];
+		$fh = $_GET["fh"];
 	}
 	
-	$filtro="";
-	if(isset($_GET["nom"]))
-	{
-		$filtro = $_GET["nom"];
-	}
+	$ventas = listarPorFecha($fd, $fh);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -41,21 +35,14 @@
 	
 		<script type="text/javascript" src="js/position.js"></script>
 		<script type="text/javascript" src="js/efectos.js"></script>
-		<script type="text/javascript" src="js/usuarios.js"></script>
+		<script type="text/javascript" src="js/ventas.js"></script>
 	
 		<script type="text/javascript">
-			function filtrarUsuarios()
+			function verVentas()
 			{
-				var f = document.getElementById("txtFiltro").value;
-				if(f=="")
-					window.location = "usuarioslista.php";
-				else
-					window.location = "usuarioslista.php?nom=" + f;
-			}
-			
-			function verVentas(documento, nombre)
-			{
-				window.location = "usuariosventas.php?userid=" + documento + "&username=" + nombre;
+				var fdesde = document.getElementById("txtFechadesde").value;
+				var fhasta = document.getElementById("txtFechahasta").value;
+				window.location = "histoventas.php?fd=" + fdesde + "&fh=" + fhasta;
 			}
 		</script>
 	</head>
@@ -95,43 +82,52 @@
 			  </nav>
 			  <?php verMenuAdmin(); ?>
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<span style="margin:10px;">Buscar por nombre:</span>
-				<input id="txtFiltro" value="" style="margin:10px;" />
-				<input type="button" value="Buscar" onclick="filtrarUsuarios();" />
+				<span style="margin:10px;">Fecha desde:</span>
+				<input id="txtFechadesde" type="date" value="<?php echo $fd; ?>" style="margin:10px;" />
+				<span style="margin:10px;">hasta:</span>
+				<input id="txtFechahasta" type="date" value="<?php echo $fh; ?>" style="margin:10px;" />
+				<input type="button" value="Buscar" onclick="verVentas()" />
 			  </div>
 		</header>
 		
 		<div id="divContenido" style="overflow-y:scroll;">
-			<span class="table-titulo">Lista de Usuarios</span>
+			<span class="table-titulo">Historico de Ventas</span>
 			<table id="tabProductos">
 				<tr id="trHead">
+					<td>Fecha</td>
+					<td>Nro</td>
 					<td>Documento</td>
 					<td>Nombre</td>
-					<td>Apellido</td>
-					<td>Dirección</td>
-					<td>E-Mail</td>
-					<td></td>
+					<td>Total</td>
 				</tr>
 				<?php
-					$rs = listar($filtro);
-					for($i=0;$i<count($rs);$i++){
-						$n = $rs[$i]["nombre"];
-						$doc = $rs[$i]["documento"];
+					$global = 0;
+					
+					for($i=0;$i<count($ventas);$i++){
+						$f = $ventas[$i]["fechahora"];
+						$n = $ventas[$i]["id"];
+						$t = $ventas[$i]["total"];
+						$doc = $ventas[$i]["usuario"];
+						$nom = $ventas[$i]["nombre"];
+						$global = $global + $t;
 						
 						$str = "";
 						$str = "<tr onmouseover='RegOver(true,this)' onmouseout='RegOver(false,this)' onclick='Seleccionar(this);' ondblclick='Seleccionar(this);'>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>$doc</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>$n</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>".$rs[$i]['apellido']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='left'>".$rs[$i]['direccion']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['email']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='center'><input type='button' value='Ver ventas' onclick='verVentas(\"$doc\", \"$n\");' /></td>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'>$f</td>\n";
+						$str.= "\t\t\t\t\t\t<td>$n</td>\n";
+						$str.= "\t\t\t\t\t\t<td>$doc</td>\n";
+						$str.= "\t\t\t\t\t\t<td>$nom</td>\n";
+						$str.= "\t\t\t\t\t\t<td align='right'>$ $t</td>\n";
 						$str.= "\t\t\t\t\t</tr>\n";
 						echo $str;
 					}//next
 				?>
 			</table>
+			<br />
+			<br />
+			<span class="table-titulo">TOTAL ENTRE FECHAS: $ <?php echo $global; ?></span>
 		</div>
+		
 
 		<footer>
 
