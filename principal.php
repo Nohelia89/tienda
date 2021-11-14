@@ -41,7 +41,7 @@
 		<script type="text/javascript">
 			function buscarCategoria(id)
 			{
-				window.location = "index.php?categoria=" + id;
+				window.location = "principal.php?categoria=" + id;
 			}
 		</script>
 	</head>

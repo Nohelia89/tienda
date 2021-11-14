@@ -65,48 +65,21 @@
 	</head>
 	<body>
 		<header>
-			<div class="cbaner">
+			<div class="cbanner">
 			</div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-				  <a class="navbar-brand" href="#"></a>
-				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  </button>
-				  <div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-					  <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="index.php">Productos</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="">Perfil</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="">Mi Carrito</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="">Mis Compras</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
-					  </li>
-					</ul>
-				  </div>
-				</div>
-			  </nav>
-			  <?php verMenuAdmin(); ?>
-			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
+			<?php
+				verMenu();
+				verMenuAdmin();
+			?>
+			<div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
 				<span style="margin:10px;">Categoria:</span><span style="margin:10px;"><?php echo comboCategorias($idCategoria); ?></span>
 				<input type="button" value="Buscar" onclick="buscarPorCategoria();" />
 				<input type="checkbox" id="chkActivo" <?php if($activo=="1") echo "checked='true'"; ?> style="margin-left:80px;" /><span style="margin-left:10px;">Activos</span>
-			  </div>
-			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
+			</div>
+			<div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
 				<input type="button"  class="btn btn-info" value="Nuevo producto" onclick="window.location='altaproducto.php';" />
 				<input type="button"  class="btn btn-info" value="Editar producto" onclick="ModiProducto();" />
-			  </div>
+			</div>
 		</header>
 		
 		<div id="divContenido" style="overflow-y:scroll;">
