@@ -125,7 +125,7 @@
 						$str.= "\t\t\t\t\t\t<td align='left'>".$rs[$i]['apellido']."</td>\n";
 						$str.= "\t\t\t\t\t\t<td align='left'>".$rs[$i]['direccion']."</td>\n";
 						$str.= "\t\t\t\t\t\t<td align='center'>".$rs[$i]['email']."</td>\n";
-						$str.= "\t\t\t\t\t\t<td align='center'><input type='button' value='Ver ventas' onclick='verVentas(\"$doc\", \"$n\");' /></td>\n";
+						$str.= "\t\t\t\t\t\t<td align='center'><input type='button'  class='btn btn-info' value='Ver ventas' onclick='verVentas(\"$doc\", \"$n\");' /></td>\n";
 						$str.= "\t\t\t\t\t</tr>\n";
 						echo $str;
 					}//next

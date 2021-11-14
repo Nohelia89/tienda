@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
                             <div class="col-sm-6">
-                                <button type="button" id="btnGuardar" class="btn btn-primary" onclick="Guardar();">Guardar</button>
+                                <button type="button" id="btnGuardar" class="btn btn-info" onclick="Guardar();">Guardar</button>
                             </div>
                         </div>
                     </form> 

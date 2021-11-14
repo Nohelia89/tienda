@@ -77,8 +77,8 @@
 			  </nav>
 			  <?php verMenuAdmin(); ?>
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<input type="button" value="Nueva Categoria" onclick="window.location='altacategoria.php';" />
-				<input type="button" value="Editar Categoria" onclick="ModiCategoria();" />
+				<input type="button" class="btn btn-info" value="Nueva Categoria" onclick="window.location='altacategoria.php';" />
+				<input type="button" class="btn btn-info" value="Editar Categoria" onclick="ModiCategoria();" />
 			  </div>
 		</header>
 		

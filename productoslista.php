@@ -104,8 +104,8 @@
 				<input type="checkbox" id="chkActivo" <?php if($activo=="1") echo "checked='true'"; ?> style="margin-left:80px;" /><span style="margin-left:10px;">Activos</span>
 			  </div>
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<input type="button" value="Nuevo producto" onclick="window.location='altaproducto.php';" />
-				<input type="button" value="Editar producto" onclick="ModiProducto();" />
+				<input type="button"  class="btn btn-info" value="Nuevo producto" onclick="window.location='altaproducto.php';" />
+				<input type="button"  class="btn btn-info" value="Editar producto" onclick="ModiProducto();" />
 			  </div>
 		</header>
 		

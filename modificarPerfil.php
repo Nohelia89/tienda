@@ -108,8 +108,8 @@
 
 						<div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
 							<div class="col-sm-6">
-								<input type="submit" class="btn btn-primary" id="btnAceptar" value="Modificar"/>
-								<input type="button" class="btn btn-primary" id="btnCancelar" value="Cancelar" onclick = "window.location='index.php'"/>
+								<input type="submit"  class="btn btn-info" id="btnAceptar" value="Modificar"/>
+								<input type="button"  class="btn btn-info" id="btnCancelar" value="Cancelar" onclick = "window.location='index.php'"/>
                             </div>
                         </div>
 

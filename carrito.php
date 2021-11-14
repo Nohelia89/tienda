@@ -140,9 +140,9 @@
 						$html="<tr><th scope='row'>$l</th>";
 						$html=$html."<td>$d</td>";
 						$html=$html."<td id='td$l' width='60'>$c</td>";
-						$html=$html."<td><input type='button' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' /> <input type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
+						$html=$html."<td><input type='button' class='btn btn-info' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' /> <input type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
 						$html=$html."<td>$ $p</td>";
-						$html=$html."<td><input type='button' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
+						$html=$html."<td><input type='button' class='btn btn-info' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
 						$html=$html."</tr>";
 						$total=$total+($c * $p);
 						echo $html;
@@ -155,7 +155,7 @@
 					<label class="table-titulo">Total: <?php echo $total; ?></label>
 				</div>
 				<div style="display:flex; flex-direction:row; justify-content:center;">
-					<button button type="button" id="btmPago" class="btn btn-primary" onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
+					<button button type="button" id="btmPago" class="btn btn-info" onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
 						Pagar Pedido
 					</button>
 					<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px" class="form-select form-select-sm" aria-label=".form-select-sm example">

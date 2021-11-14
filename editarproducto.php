@@ -230,7 +230,7 @@
 								</div>
 								<div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
 									<div class="col-sm-6">
-										<button type="button" id="btmProducto" class="btn btn-primary" onclick="GuardarProducto(<?php echo $producto["id_producto"]; ?>);">Guardar</button>
+										<button type="button" id="btmProducto" class="btn btn-info" onclick="GuardarProducto(<?php echo $producto["id_producto"]; ?>);">Guardar</button>
 									</div>
 								</div>
 							</form>
@@ -263,7 +263,7 @@
 									<label for="formFileMultiple" class="form-label">Imagenes:</label>
 									<input class="form-control" type="file" id="formFileMultiple" name="img[]" multiple />
 								</div>
-								<button type="button" id="btnSubir" class="btn btn-primary" onclick="AgregarImagenes(<?php echo $producto["id_producto"]; ?>);">Subir Imagenes</button>
+								<button type="button" id="btnSubir" class="btn btn-info" onclick="AgregarImagenes(<?php echo $producto["id_producto"]; ?>);">Subir Imagenes</button>
 							</form>
 						</td>
 						</tr>
