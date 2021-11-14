@@ -4,18 +4,6 @@
 	background-size: cover;
 	height:230px;
 }
-.card-container{
-	display: flex;
-	max-width: 500px;
-	border: 1px solid #111;
-	margin:auto;
-	margin-top: 100px;
-	margin-bottom: 100px;
-	color: black;
-}
-.form-group{
-	margin: 5px 20px;
-}
 
 .table-titulo{
 	padding:5px;
@@ -23,3 +11,28 @@
 	font-size:12pt;
 	color:#666666;
 }
+
+
+.cbanner {
+	background-image: url('../imagenes/banner.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height:230px;
+}
+
+.padre{
+	margin-top:5%;
+	width:1000px;
+	margin-left:80px;
+}
+
+.hijo1{
+	float:left;
+	width:600px;
+}
+.hijo2{
+	float:right;
+	width:400px;
+	
+}
+

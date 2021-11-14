@@ -106,4 +106,17 @@
 		$sql = "INSERT INTO imagenes(id_producto, url_imagen) VALUES($producto,'$imagen')";
 		Ejecutar($sql);
 	}
+
+	
+	function listarCategorias(){
+		$arr = array();
+		$sql = "SELECT id, nombre FROM categoria ORDER BY id";
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$arr[$i] = $reg;
+			$i++;
+		}//wend
+		return $arr;
+	}//end
 ?>
