@@ -77,7 +77,7 @@
 						<a class='nav-link' href='login.html'>Ingresar</a>
 					  </li>
 					  <li class='nav-item'>
-						<a class='nav-link' href='registro.html'>Registrarse</a>
+						<a class='nav-link' href='registro.php'>Registrarse</a>
 					  </li>
 					  <!-- esto va solo si estas logueado
 					  <li class='nav-item'>

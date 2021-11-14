@@ -1,3 +1,12 @@
+<?php
+	
+	include("menuadmin.php");
+	session_start();
+	
+
+	
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
@@ -10,80 +19,79 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 	</head>
-	<body style="background-image: url('imagenes/login.jpg'); background-size: cover;">
+	<body >
 		<header>
-			<div class="cbaner">
-			</div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%;">
-				<div class="container-fluid">
-				  <a class="navbar-brand" href="#"></a>
-				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  </button>
-				  <div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-					  <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="index.php">Bienvenido</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="index.html">Productos</a>
-					  </li>
-					</ul>
-				  </div>
+			<header>
+				<div class="cbanner">
 				</div>
-			  </nav>
-			</div>
-		</header>
+				<?php 
+					verMenu();
+			
+				?>
+			</header>	
 		
         <section>
-            <div class="container">
-                <div class="card card-container">
-                    <form class="form-horizontal" action="newuser.php" method="POST">
+            <div class="container" style="margin-top: 100px; box-shadow: 2px 2px 5px #999; width:500px; font-weight:bold; font-size:17px">
+                <div class="card card-container" >
+                    <form class="form-horizontal" style="margin-top: 50px;" action="newuser.php" method="POST">
                         <div class="form-group">
                             <label class="control-label col-sm-12" for="inpUser">Documento:</label>
+							<br>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="inpUser" name="txtUser" maxlength="10" placeholder="Ingresar Documento">
                             </div>
+							<br>
 						</div>
 
 						<div class="form-group">
                             <label class="control-label col-sm-12" for="inpPass">Password:</label>
+							<br>
                             <div class="col-sm-12">
                                 <input class="form-control" id="inpPass"  name="txtPass" maxlength="10" type="password" placeholder="Ingresar Password">
                             </div>
+							<br>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpNom">Nombre:</label>
+							<br>
 							<div class="col-sm-12">
                                 <input class="form-control" type="text" id="inpNom" class="cTextBox" name="txtNom" maxlength="30"placeholder="Ingresar Nombre"> 
 							</div>
+							<br>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpApe">Apellido:</label>
+							<br>
 							<div class="col-sm-12">
                                 <input class="form-control" type="text" id="inpApe" class="cTextBox" name="txtApe" maxlength="30" placeholder="Ingresar Apellido">
 							</div>
+							<br>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpDir">Dirección:</label>
+							<br>
 							<div class="col-sm-12">
                                 <input class="form-control" type="text" id="inpDir" class="cTextBox" name="txtDir" maxlength="20" placeholder="Ingresar Dirección">
 							</div>
+							<br>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpMail">Mail:</label>
+							<br>
 							<div class="col-sm-12">
                                 <input class="form-control" type="text" id="inpMail" class="cTextBox" name="txtMail" maxlength="40" placeholder="Ingresar Mail">
 							</div>
+							<br>
 						</div>
 
-						<div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
-							<div class="col-sm-6">
+						<div class="form-group" style="margin-left: 120px; margin-top: 10px; margin-bottom: 20px;">
+					
 								<input type="submit" class="btn btn-primary" id="btnAceptar" value="Registrar"/>
-								<input type="button" class="btn btn-primary" id="btnCancelar" value="Cancelar" onclick = "window.location='index.php'"/>
+								<input type="button" style="margin-left: 40px"  class="btn btn-primary" id="btnCancelar" value="Cancelar" onclick = "window.location='index.php'"/>
                             </div>
+							<br>
                         </div>
 
                     </form> 
