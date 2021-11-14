@@ -125,13 +125,17 @@
 			</table>
 			<div style="width:100%; display:flex; flex-direction:column;">
 				<div style="display:flex; flex-direction:row; justify-content:center; padding:20px;">
-					<label class="table-titulo">Total: <?php echo $total; ?></label>
+					<label class="table-titulo" style= 'font-family: Exo, sans-serif;
+	font-size: 17px;
+	font-weight: Bold;'>Total: $ <?php echo $total; ?></label>
 				</div>
 				<div style="display:flex; flex-direction:row; justify-content:center;">
-					<button button type="button" id="btmPago" class="btn btn-primary" onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
+					<button button type="button" id="btmPago" class="btn btn-info"  onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
 						Pagar Pedido
 					</button>
-					<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px" class="form-select form-select-sm" aria-label=".form-select-sm example">
+					<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px;'font-family: Exo, sans-serif;
+	font-size: 17px;
+	font-weight: Bold;" class="form-select form-select-sm" aria-label=".form-select-sm example">
 						<option selected id="1">Pagar con tarjeta</option>
 						<option id="0">Pagar en efectivo</option>
 					</select>

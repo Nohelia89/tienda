@@ -51,12 +51,15 @@
 							  <li class='nav-item'>
 								<a class='nav-link' href='historial.php'>Mis Compras</a>
 							  </li>
-							  <li class='nav-item'>
-								<a class='nav-link' href='cerrarsesion.php'>Cerrar Sesion</a>
+							</ul>
+							</div>
+							<div class='collapse navbar-collapse justify-content-between'></div>
+							<ul class='navbar-nav'>
+							  <li class='nav-right'>
+								<a class='nav-link' href='cerrarsesion.php'>Cerrar Sesión</a>
 							  </li>
 							</ul>
 						  </div>
-						</div>
 					</nav>";
 			}
 		}
@@ -73,23 +76,18 @@
 					  <li class='nav-item'>
 						<a class='nav-link' aria-current='page' style='font-weight: bold; font-' href='index.php'>Inicio</a>
 					  </li>
-					  <li class='nav-item'>
-						<a class='nav-link' href='login.html'>Ingresar</a>
-					  </li>
-					  <li class='nav-item'>
-						<a class='nav-link' href='registro.php'>Registrarse</a>
-					  </li>
-					  <!-- esto va solo si estas logueado
-					  <li class='nav-item'>
-						<a class='nav-link' href='#'>Carrito</a>
-					  </li>
-					  <li class='nav-item'>
-						<a class='nav-link ' href='#'>Historial de Compras</a>
-					  </li>
-					  -->
-					</ul>
-				  </div>
+					  </ul>
 				</div>
+					<div class='collapse navbar-collapse justify-content-between'></div>
+							<ul class='navbar-nav'>
+							  <li class='nav-right'>
+								<a class='nav-link' href='login.html'> Ingresar</a>
+							  </li>
+							  <li class='nav-right'>
+								<a class='nav-link' href='registro.php'>Registrarse</a>
+							  </li>
+							</ul>
+						  </div>
 			  </nav>";
 		}
 	}
@@ -109,7 +107,7 @@
 									  </button>
 									  <div class='collapse navbar-collapse' id='navbarNav'>
 										<ul class='navbar-nav'>
-										  <li class='nav-item'>
+										  <li class='nav-item style='margin-right: 20px'>
 											<a class='nav-link' href=''>Administración:</a>
 										  </li>
 										  <li class='nav-item'>
@@ -122,7 +120,7 @@
 											<a class='nav-link' href='usuarioslista.php'>Lista de Usuarios</a>
 										  </li>
 										  <li class='nav-item'>
-											<a class='nav-link' href='histoventas.php'>Histo Ventas</a>
+											<a class='nav-link' href='histoventas.php'>Histórico Ventas</a>
 										  </li>
 										</ul>
 									  </div>

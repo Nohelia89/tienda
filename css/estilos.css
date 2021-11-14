@@ -65,8 +65,39 @@ ul input{
 }
 
 .nav-link{
+	color: blue;
+	font-family: 'Exo', sans-serif;
+	font-size: 17px;
+	font-weight: Bold;
+}
+
+.form-group{
 	color: #;
 	font-family: 'Exo', sans-serif;
 	font-size: 17px;
 	font-weight: Bold;
 }
+
+th{
+	color: #;
+	font-family: 'Exo', sans-serif;
+	font-size: 17px;
+	font-weight: Bold;
+}
+
+td{
+	color: #;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+
+}
+
+
+tr{
+	color: #;
+	font-family: 'Exo', sans-serif;
+	font-size: 17px;
+	font-weight: Bold;
+}
+
+
