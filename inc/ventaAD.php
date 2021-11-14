@@ -13,13 +13,10 @@
 			$sql="SELECT nrolinea, cantidad, precio, detalle, idproducto FROM pedidolineas WHERE idpedido=$id ORDER BY nrolinea";
 			$rs = Ejecutar($sql);
 			$i = 0;
-			$total = 0;
 			while($reg = mysqli_fetch_array($rs)){
 				$resu["lineas"][$i] = $reg;
-				$total= $total + ($resu["lineas"][$i]['cantidad']*$resu["lineas"][$i]['precio']);
 				$i++;
 			}//wend
-			$resu['cabezal']['total'] = $total;
 		}
 		return $resu;
 	}
@@ -45,7 +42,7 @@
 				$idprod = $lineas[$i]["idproducto"];
 				
 				$sql = "INSERT INTO ventalineas(idventa, nrolinea, cantidad, precio, detalle, idproducto) ";
-				$sql = $sql."VALUES($lastid, $nro, $cantidad, $precio, $detalle, $idprod)";
+				$sql = $sql."VALUES($lastid, $nro, $cantidad, $precio, '$detalle', $idprod)";
 				EjecutarConexion($con, $sql);
 				
 				$sql = "UPDATE producto SET stock = stock-$cantidad WHERE id_producto=$idprod";

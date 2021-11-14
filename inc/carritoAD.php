@@ -29,11 +29,14 @@
 	}
 
 	function eliminarProductoPedido($idpedido, $nrolinea){
-	
-		
 		$sql = "DELETE FROM pedidolineas WHERE idpedido=".$idpedido." AND nrolinea=".$nrolinea;
 		Ejecutar($sql);
+	}
 	
+	function actualizarCantidad($idpedido, $nrolinea, $cantidad)
+	{
+		$sql = "UPDATE pedidolineas SET cantidad=$cantidad WHERE idpedido=$idpedido AND nrolinea=$nrolinea";
+		Ejecutar($sql);
 	}
 
 	//end
@@ -56,6 +59,50 @@
 		return $resu;
 	}
 
+	function calcularTotal($idpedido)
+	{
+		$resu = array();
+		$sql = "SELECT cantidad, precio FROM pedidolineas WHERE idpedido=$idpedido";
+		$rs = Ejecutar($sql);
+		$i = 0;
+		while($reg = mysqli_fetch_array($rs)){
+			$resu[$i] = $reg;
+			$i++;
+		}//wend
+		
+		$total = 0;
+		for($x=0; $x<count($resu); $x++)
+		{
+			$p = $resu[$x]["precio"];
+			$c = $resu[$x]["cantidad"];
+			
+			$total = $total + ($c*$p);
+		}
+		setTotalPedido($idpedido, $total);
+	}
+	
+	function getLineaPorProducto($idpedido, $idproducto)
+	{
+		$resu = array();
+		$sql = "SELECT nrolinea, cantidad, precio FROM pedidolineas WHERE idpedido=$idpedido AND idproducto=$idproducto";
+		$rs = Ejecutar($sql);
+		while($reg = mysqli_fetch_array($rs)){
+			$resu = $reg;
+		}//wend
+		return $resu;
+	}
+	
+	function setLineaPorProducto($idpedido, $nrolinea, $cantidad)
+	{
+		$sql = "UPDATE pedidolineas SET cantidad=$cantidad WHERE idpedido=$idpedido AND nrolinea=$nrolinea";
+		Ejecutar($sql);
+	}
+	
+	function setTotalPedido($idpedido, $monto)
+	{
+		$sql = "UPDATE pedido SET total=$monto WHERE id_pedido=$idpedido";
+		Ejecutar($sql);
+	}
 
 	function getProducto($idProducto){
 		$resu = array();

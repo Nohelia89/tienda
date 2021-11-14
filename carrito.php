@@ -1,5 +1,6 @@
 <?php
-	include("inc/carritoAD.php");	
+	include("inc/carritoAD.php");
+	include("menuadmin.php");
 	
 	session_start();
 	
@@ -15,8 +16,9 @@
 		header("Location: ./index.php");
 		exit();
 	}
+	
+	$lista=getCarrito($_SESSION["documento"]);
 ?>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -27,29 +29,56 @@
 		refresh automatico ->
 		<meta http-equiv="refresh" content="3; URL=index.php" />
 		-->
-		<title>Carrito</title>
+		<title>Index</title>
 	
-	
+		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
 		<script type="text/javascript">
 			function pagarPedido(pedido)
 			{
+				//alert(pedido);
+				//return;
+				
 				var cmbMetodo = document.getElementById("cmbMetodo");
 				var metodoPago = cmbMetodo.options[cmbMetodo.selectedIndex].id;
+				var metodo="Efectivo";
 				if(metodoPago == 1){
-					var metodo="Tarjeta";	
-				}else{
-					var metodo="Efectivo";
+					metodo="Tarjeta";	
 				}
 				window.location = "newVenta.php?pedido="+ pedido + "&metodo=" + metodo;
+			}
+			
+			function sumarRestar(pedido, nrolinea, prod, suma)
+			{
+				var celda = document.getElementById("td" + nrolinea);
+				var cantActual = celda.innerHTML;
+				
+				cantActual = parseFloat(cantActual);
+				if(suma)
+					cantActual = cantActual+1;
+				else
+				{
+					if(cantActual-1<=0)
+						return;
+					
+					cantActual = cantActual-1;
+				}
+
+				window.location="deleteCarrito.php?action=update&pedido=" + pedido + "&nrolinea=" + nrolinea + "&producto=" + prod + "&cantidad=" + cantActual;
+			}
+			
+			function eliminar(pedido, nrolinea)
+			{
+				window.location="deleteCarrito.php?action=delete&pedido=" + pedido + "&nrolinea=" + nrolinea;
 			}
 		</script>
 	</head>
 	<body>
 		<header>
-			
-
-			<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%;">
+			<div class="cbaner">
+			</div>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 				  <a class="navbar-brand" href="#"></a>
 				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,77 +87,85 @@
 				  <div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 					  <li class="nav-item">
-						<a class="nav-link disabled" aria-current="page" href="#">Bienvenido Facundo</a>
+						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="index.html">Productos</a>
+						<a class="nav-link" href="index.php">Productos</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="#">Carrito</a>
+						<a class="nav-link" href="">Perfil</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link " href="#">Historial de Compras</a>
+						<a class="nav-link" href="carrito.php">Mi Carrito</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="historial.php">Mis Compras</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
 					  </li>
 					</ul>
 				  </div>
 				</div>
 			  </nav>
-				
-			</div>
+				<?php verMenuAdmin(); ?>
 		</header>
+		
+		<div class="row row-cols-1 row-cols-md-3 g-4" style="padding:100px;">
+			<table class="table table-striped">
+				<thead>
+				  <tr>
+					<th scope="col">Linea</th>
+					<th scope="col">Articulo</th>
+					<th scope="col">Cantidad</th>
+					<th scope="col"></th>
+					<th scope="col">Precio</th>
+					<th scope="col"></th>
+				  </tr>
+				</thead>
+				<tbody>
 
-		<table class="table table-striped">
-			<thead>
-			  <tr>
-			  	<th scope="col">Linea</th>
-				<th scope="col">Articulo</th>
-				<th scope="col">Cantidad</th>
-				<th scope="col">Precio</th>
-				<th scope="col"></th>
-			  </tr>
-			</thead>
-			<tbody>
-
-			<?php 
-			
-			$lista=getCarrito($_SESSION["documento"]);
-			$total=0;
-			$idPedido=0;
-			for($i=0; $i<count($lista); $i++)
-			{
-			$idPedido=$lista[0]['idpedido'];
-			$html="<tr><th scope='row'>".$lista[$i]["nrolinea"]."</th>";
-			$html=$html."<td>".$lista[$i]['detalle']."</td>";
-			$html=$html."<td>".$lista[$i]['cantidad']."</td>";
-			$html=$html."<td>".$lista[$i]['precio']."</td>";
-	
-			$html=$html."<td><input type='button' value='eliminar' onclick='window.location=\"deleteCarrito.php?pedido=".$lista[$i]['idpedido']."&nrolinea=".$lista[$i]['nrolinea']."\"' /></td>";
-			$html=$html."</tr>";
-			$total=$total+($lista[$i]['cantidad']*$lista[$i]['precio']);
-			echo $html;
-		}
-
-			
-			?>
-			
-			</tbody>
-		  </table>
-	
-		  <span class="nav-link" aria-current="page" >Total: <?php echo $total; ?></span>
-		  <br>
-		  
-		<span>
-
-		<div style="display:flex; flex-direction:row">
-			<button button type="button" id="btmPago" class="btn btn-primary" onclick="pagarPedido(<?php echo $idPedido; ?>);"
-			style="margin-left:10px;">Pagar Pedido</button>
-
-			<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px" class="form-select form-select-sm" aria-label=".form-select-sm example">
-				<option selected id="1">Pagar con tarjeta</option>
-				<option id="0">Pagar en efectivo</option>
-			</select>
+				<?php 
+					$total=0;
+					$idpedido=0;
+					for($i=0; $i<count($lista); $i++)
+					{
+						$idpedido=$lista[0]['idpedido'];
+						$l = $lista[$i]['nrolinea'];
+						$d = $lista[$i]['detalle'];
+						$c = $lista[$i]['cantidad'];
+						$p = $lista[$i]['precio'];
+						$prod = $lista[$i]['idproducto'];
+						
+						$html="<tr><th scope='row'>$l</th>";
+						$html=$html."<td>$d</td>";
+						$html=$html."<td id='td$l' width='60'>$c</td>";
+						$html=$html."<td><input type='button' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' /> <input type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
+						$html=$html."<td>$ $p</td>";
+						$html=$html."<td><input type='button' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
+						$html=$html."</tr>";
+						$total=$total+($c * $p);
+						echo $html;
+					}			
+				?>
+				</tbody>
+			</table>
+			<div style="width:100%; display:flex; flex-direction:column;">
+				<div style="display:flex; flex-direction:row; justify-content:center; padding:20px;">
+					<label class="table-titulo">Total: <?php echo $total; ?></label>
+				</div>
+				<div style="display:flex; flex-direction:row; justify-content:center;">
+					<button button type="button" id="btmPago" class="btn btn-primary" onclick="pagarPedido(<?php echo $idpedido; ?>);" style="margin-left:10px;">
+						Pagar Pedido
+					</button>
+					<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px" class="form-select form-select-sm" aria-label=".form-select-sm example">
+						<option selected id="1">Pagar con tarjeta</option>
+						<option id="0">Pagar en efectivo</option>
+					</select>
+				</div>
+			</div>
 		</div>
-		  
+
 		<footer>
 
 		</footer>

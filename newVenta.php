@@ -4,7 +4,7 @@
 	$idpedido = $_GET["pedido"];
 	$pedido = getPedido($idpedido);
 	
-	if($pedido["cabezal"]<=0)
+	if(count($pedido)<=0)
 	{
 		header("Location: pageerror.php?err=elem&pag=carrito.php");
 		exit();
