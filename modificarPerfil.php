@@ -60,7 +60,7 @@
 							</div>
 
 						
-						<div class="form-group" style="display:flex; flex-direction:row; justify-content:center;">
+						<div class="form-group">
 							<label class="control-label col-sm-12" for="inpNom">Nombre:</label>
 							
 							<div class="col-sm-12">
