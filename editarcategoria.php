@@ -48,6 +48,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 		<!--
 		refresh automatico ->
 		<meta http-equiv="refresh" content="3; URL=index.php" />
@@ -116,7 +117,7 @@
 
         <section width="100%">
             <div class="container" style="width:100%;">
-                <div class="card card-container" style="display:table; width:100%; padding:30px; margin-top:10px; max-width:1200px;">
+                <div class="card card-container" style="display:table; width:100%; padding:30px; margin-top:10px; max-width:600px;">
 					<table width="100%">
 						<tr>
 						<td>
@@ -133,7 +134,7 @@
 								</div>
 								<div class="form-group" style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
 									<div class="col-sm-6">
-										<button type="button" id="btnGuardar" class="btn btn-primary" onclick="Guardar(<?php echo $categoria["id"]; ?>);">Guardar</button>
+										<button type="button" id="btnGuardar" class="btn btn-info" onclick="Guardar(<?php echo $categoria["id"]; ?>);">Guardar</button>
 									</div>
 								</div>
 							</form>

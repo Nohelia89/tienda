@@ -35,6 +35,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	
 		<script type="text/javascript" src="js/position.js"></script>
 		<script type="text/javascript" src="js/efectos.js"></script>
@@ -58,7 +59,7 @@
 			?>
 		</header>
 		
-		<div class="row row-cols-1 row-cols-md-3 g-4" style="padding:100px;">
+		<div class="row row-cols-1 row-cols-md-1 g-4" style="padding:100px;">
 			<table id="tabProductos" class="table table-striped">
 				<thead>
 				  <tr>
@@ -74,7 +75,7 @@
 						$id = $lista[$i]['id'];
 						
 						$html="<tr onmouseover='RegOver(true,this);' onmouseout='RegOver(false,this);' onclick='verDetalle($id);'>\n";
-						$html=$html."<th scope='row'>".$lista[$i]["fechahora"]."</th>";
+						$html=$html."<td scope='row'>".$lista[$i]["fechahora"]."</td>";
 						$html=$html."<td>".$lista[$i]['id']."</td>";
 						$html=$html."<td align='right'>$ ".$lista[$i]['total']."</td>";
 						$html=$html."</tr>";

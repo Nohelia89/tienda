@@ -50,6 +50,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 		<!--
 		refresh automatico ->
 		<meta http-equiv="refresh" content="3; URL=index.php" />
@@ -189,7 +190,7 @@
 										<?php 
 											echo comboCategorias($producto["categoria"]);
 										
-											echo "<span style='margin-left:30px;'>Activo:</span>";
+											echo "<br /><span style='margin-left:30px;'>Activo:</span>";
 										
 											$vig = $producto["activo"];
 											if($vig==1){
@@ -218,7 +219,7 @@
 									$html = $html."<div style='width:260px; height:160px; border:solid 1px; margin:10px; padding:5px;'>";
 									$html = $html."<img src='./imagenes/".$imagenes[$i][0]."' style='width:100%; height:100%;' />";
 									$html = $html."</div></td>";
-									$html = $html."<td style='width:20%'><input type='button' value='Eliminar' onclick='EliminarImagen(".$producto["id_producto"].",\"".$imagenes[$i][0]."\");' /></td>";
+									$html = $html."<td style='width:20%'><input class='btn btn-info' type='button' value='Eliminar' onclick='EliminarImagen(".$producto["id_producto"].",\"".$imagenes[$i][0]."\");' /></td>";
 									$html = $html."</tr>";
 									echo $html;
 								}

@@ -33,6 +33,7 @@
 	
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	
 		<script type="text/javascript">
 			function pagarPedido(pedido)
@@ -42,9 +43,9 @@
 				
 				var cmbMetodo = document.getElementById("cmbMetodo");
 				var metodoPago = cmbMetodo.options[cmbMetodo.selectedIndex].id;
-				var metodo="Efectivo";
+				var metodo="Domicilio";
 				if(metodoPago == 1){
-					metodo="Tarjeta";	
+					metodo="Electronico";
 				}
 				window.location = "newVenta.php?pedido="+ pedido + "&metodo=" + metodo;
 			}
@@ -84,7 +85,7 @@
 			?>
 		</header>
 		
-		<div class="row row-cols-1 row-cols-md-3 g-4" style="padding:100px;">
+		<div class="row row-cols-1 row-cols-md-1 g-4" style="padding:100px;">
 			<table class="table table-striped">
 				<thead>
 				  <tr>
@@ -93,6 +94,7 @@
 					<th scope="col">Cantidad</th>
 					<th scope="col"></th>
 					<th scope="col">Precio</th>
+					<th scope="col">Subtotal</th>
 					<th scope="col"></th>
 				  </tr>
 				</thead>
@@ -109,13 +111,16 @@
 						$c = $lista[$i]['cantidad'];
 						$p = $lista[$i]['precio'];
 						$prod = $lista[$i]['idproducto'];
+						$t = $c*$p;
 						
 						$html="<tr><th scope='row'>$l</th>";
 						$html=$html."<td>$d</td>";
 						$html=$html."<td id='td$l' width='60'>$c</td>";
-						$html=$html."<td><input type='button' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' /> <input type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
+						$html=$html."<td><input class='btn btn-info' type='button' value='-' onclick='sumarRestar($idpedido,$l,$prod,false);' />
+											<input class='btn btn-info' type='button' value='+' onclick='sumarRestar($idpedido,$l,$prod,true);' /></td>";
 						$html=$html."<td>$ $p</td>";
-						$html=$html."<td><input type='button' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
+						$html=$html."<td>$ $t</td>";
+						$html=$html."<td><input class='btn btn-info' type='button' value='Eliminar' onclick='eliminar($idpedido, $l);' /></td>";
 						$html=$html."</tr>";
 						$total=$total+($c * $p);
 						echo $html;
@@ -136,8 +141,8 @@
 					<select id="cmbMetodo" style="width: 250px; margin-left:10px; padding-top:5px;'font-family: Exo, sans-serif;
 	font-size: 17px;
 	font-weight: Bold;" class="form-select form-select-sm" aria-label=".form-select-sm example">
-						<option selected id="1">Pagar con tarjeta</option>
-						<option id="0">Pagar en efectivo</option>
+						<option selected id="1">Pago electrónico</option>
+						<option id="0">Pago en domicilio</option>
 					</select>
 				</div>
 			</div>

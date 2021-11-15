@@ -72,7 +72,7 @@
 			$i++;
 		}//wend
 		$str = "";
-		$str = "<select id='comboCategorias'>\n";
+		$str = "<select id='comboCategorias' class='form-select form-select-sm' style='width:300px;'>\n";
 		$str.= "<option id='0'>-Seleccionar-</option>\n";
 		for($i=0;$i<count($arr);$i++){
 			if($arr[$i]['id']==$def){

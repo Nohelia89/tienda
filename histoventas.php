@@ -32,6 +32,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link rel="stylesheet" type="text/css" href="css/productos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	
 		<script type="text/javascript" src="js/position.js"></script>
 		<script type="text/javascript" src="js/efectos.js"></script>
@@ -55,11 +56,13 @@
 				verMenuAdmin();
 			?>
 			  <div width="100%" head="300px" style="position:relative; display:block; padding:20px;">
-				<span style="margin:10px;">Fecha desde:</span>
+				<span class="table-titulo" style="margin:10px; font-family: Exo, sans-serif;
+								font-size: 17px; font-weight: Bold;">Fecha desde:</span>
 				<input id="txtFechadesde" type="date" value="<?php echo $fd; ?>" style="margin:10px;" />
-				<span style="margin:10px;">hasta:</span>
+				<span class="table-titulo" style="margin:10px; font-family: Exo, sans-serif;
+								font-size: 17px; font-weight: Bold;">hasta:</span>
 				<input id="txtFechahasta" type="date" value="<?php echo $fh; ?>" style="margin:10px;" />
-				<input type="button" value="Buscar" onclick="verVentas()" />
+				<input class="btn btn-info" type="button" value="Buscar" onclick="verVentas()" />
 			  </div>
 		</header>
 		
@@ -98,7 +101,8 @@
 			</table>
 			<br />
 			<br />
-			<span class="table-titulo">TOTAL ENTRE FECHAS: $ <?php echo $global; ?></span>
+			<span class="table-titulo" style="margin:10px; font-family: Exo, sans-serif;
+								font-size: 17px; font-weight: Bold;">TOTAL ENTRE FECHAS: $ <?php echo $global; ?></span>
 		</div>
 		
 

@@ -55,13 +55,14 @@
 		invoca archivo css -->
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 		<!-- invoca script -->
 		
 		<script type="text/javascript">
 			var pag;
 			function init(p){
 				pag = p;
-				setTimeout("Redirec()",5000);
+				setTimeout("Redirec()",4000);
 			}//end
 			
 			function Redirec(){
@@ -78,7 +79,7 @@
 	</head>
 	<body onload="init('<?php echo $pag; ?>')">
 		<header>
-			<div class="cbaner">
+			<div class="cbanner">
 			</div>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 5%;">
 				<div class="container-fluid">
@@ -87,11 +88,6 @@
 					<span class="navbar-toggler-icon"></span>
 				  </button>
 				  <div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-					  <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="index.php">Bienvenido</a>
-					  </li>
-					</ul>
 				  </div>
 				</div>
 			  </nav>

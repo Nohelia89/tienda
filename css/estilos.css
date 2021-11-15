@@ -18,7 +18,7 @@
 
 .padre{
 	margin-top:5%;
-	width:1000px;
+	width:1200px;
 	margin-left:80px;
 }
 
@@ -30,7 +30,7 @@
 }
 .hijo2{
 	float:right;
-	width:400px;
+	width:700px;
 }
 
 /* Clear floats after the columns */

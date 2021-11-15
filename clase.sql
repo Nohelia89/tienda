@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2021 a las 23:14:12
+-- Tiempo de generación: 15-11-2021 a las 03:22:01
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -67,7 +67,6 @@ INSERT INTO `imagenes` (`id_producto`, `url_imagen`) VALUES
 (12312, '12312_2.jpg'),
 (12312, '12312_3.jpg'),
 (1, 'cocina1.png'),
-(1, 'cocina2.png'),
 (2, '2_0.jpg'),
 (2, '2_1.jpg'),
 (3, '3_0.jpg'),
@@ -98,7 +97,8 @@ INSERT INTO `imagenes` (`id_producto`, `url_imagen`) VALUES
 (17, '17_0.jpg'),
 (17, '17_1.jpg'),
 (15, '15_1.jpg'),
-(15, '15_2.jpg');
+(15, '15_2.jpg'),
+(1, '1_3.jpg');
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,10 @@ INSERT INTO `pedido` (`id_pedido`, `total`, `fecha`, `confirmado`, `usuario`) VA
 (8, 0, '2021-11-13 16:16:55', '1', '1'),
 (9, 0, '2021-11-13 16:18:19', '1', '1'),
 (10, 10000, '2021-11-14 19:11:35', '1', 'admin'),
-(11, 85000, '2021-11-14 19:12:13', '1', 'admin');
+(11, 85000, '2021-11-14 19:12:13', '1', 'admin'),
+(12, 10000, '2021-11-14 22:17:50', '1', '1'),
+(13, 90000, '2021-11-14 22:40:09', '0', '1'),
+(14, 0, '2021-11-14 23:20:27', '0', 'admin');
 
 -- --------------------------------------------------------
 
@@ -165,7 +168,10 @@ INSERT INTO `pedidolineas` (`idpedido`, `nrolinea`, `cantidad`, `detalle`, `prec
 (9, 1, 5, '1', 10, 123),
 (10, 1, 1, 'Juguera Philips Hr1855 Juguera Philips Hr1855', 5000, 14),
 (10, 2, 2, 'Barra de sonido TCL T310', 2500, 15),
-(11, 1, 1, 'Smart TV Samsung 55\" UHD UN55AU7000', 85000, 10);
+(11, 1, 1, 'Smart TV Samsung 55\" UHD UN55AU7000', 85000, 10),
+(12, 1, 2, 'Juguera Philips Hr1855 Juguera Philips Hr1855', 5000, 14),
+(13, 1, 4, 'Juguera Philips Hr1855 Juguera Philips Hr1855', 5000, 14),
+(13, 2, 2, 'Lavarropa Samsung Ww10k6410qx 10,5kg', 35000, 7);
 
 -- --------------------------------------------------------
 
@@ -201,7 +207,7 @@ INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock
 (11, 'Parlante Samsung Giga Audio Party MX-T50', ' Potencia 300w a 699w Características Bluetooth, Con control remoto, Con puerto usb', 9800.00, 24, '1', 3),
 (12, 'Heladera LG GS65MPP1 626 lts', '  Modelo GS65MPP1  Origen México  Tipo de enfriamiento frío seco  Inverter  Capacidad bruta 687L  Eficiencia energética A  Medidas: alto 179cm, ancho 91.2cm, profundidad 73.8cm  Color Platinum Silver  Mega Capacidad  Moist Balance Crisper  Inverter Linear Compressor  Smart Diagnosis™  Iluminación LED  Garantía 10 años en el motor / 1 año defecto de fábrica', 90000.00, 5, '1', 2),
 (13, 'Heladera Continental 2 puertas 370 lts', '      Tipo de enfriamiento frío seco     Capacidad refrigerador: 279L     Capacidad freezer: 91L     Capacidad bruta: 370L     Eficiencia energética A     Medidas: alto 1791cm, ancho 600cm, profundidad 700cm     Peso 57kg     Color blanco     Incluye porta latas y huevera     Garantía: 1 año, 2 años de garantía en el compresor', 70000.00, 9, '1', 2),
-(14, 'Juguera Philips Hr1855 Juguera Philips Hr1855', ' Color Negro Potencia 700w a 1000w Capacidad 1,6 a 2 lts', 5000.00, 11, '1', 1),
+(14, 'Juguera Philips Hr1855 Juguera Philips Hr1855', ' Color Negro Potencia 700w a 1000w Capacidad 1,6 a 2 lts', 5000.00, 9, '1', 1),
 (15, 'Barra de sonido TCL T310', ' Color Negro Potencia 101w a 299w Características Bluetooth', 2500.00, 8, '1', 1),
 (17, 'Freezer Horizontal Consul Cha31kbdwx 311 lts', '      País de Origen Brasil     Fábrica Joinville     Capacidad Bruta 311 lts     Capacidad Neta 309 lts     Dimensiones del producto (An x A x Pr) 945 x 940 x 780     Dimensiones con empaque (A x An x Pr) 980 x 973 x 810     Peso Producto 48,5 kg     Tipo de Embalaje EPS + Shrink     Peso Embalado 49,6 kg     Cantidad Masa Refrigerante 85 gr     ISO Clase Climática T     Compresor EMYe70HEP     Cantidad de puertas 1     Color Puerta y Gabinete Blanco     Tipo de Deshielo Deshielo semiautomático     Diseño puerta Cuadrada     Manijas Externa con llave de seguridad     Cantidad de cajones Canasto en acero (1)     Bandeja para hielo No     Drenaje Frontal Si     Función Dual Si     Funciones interfaz del usuario Modo Congelador - Modo Refrigerador     Iluminación No     Control de Temperatura Control electrónico externo     Rueda Si     Tipo Gas Refrigerante R134a     Voltaje - Frecuencia 220V-50Hz     Garantía 1 año     Eficiencia energetica: D', 120000.00, 5, '1', 1),
 (123, 'Aire Acondicionado', '    Capacidad del aire acondicionado: 12.000 BTU     Gas: R-410     Eficiencia energética: A     Alto unidad interior: 40 cm     Ancho unidad interior: 113 cm     Profundidad unidad interior: 30 cm     Peso unidad interior: 12 kg     Alto unidad exterior: 77 cm     Ancho unidad exterior: 102 cm     Profundidad unidad exterior: 43 cm     Peso unidad exterior: 45 kg     Color: Blanco     Incluye control remoto', 24000.00, 20, '1', 6),
@@ -229,7 +235,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`documento`, `password`, `nombre`, `apellido`, `email`, `direccion`, `esadmin`) VALUES
 ('', 'RogersEste', 'Rogers', 'Estee', 'RogersEstee@yahoo.com', '1', 0),
-('1', 'user123', 'Nohelia', 'Yah', 'Nohelia@gmail.com', '1', 1),
+('1', '1', 'Nohelia', 'Yah', 'Nohelia@gmail.com', '1', 0),
 ('12345', 'asd', 'juan', 'sadf', 'asd', 'asd', 0),
 ('2', '2', 'Nohe2', '3', 'das', 'a', 0),
 ('2354236-1', 'LynsieBryc', 'Lynsie', 'Bryce', 'LynsieBryce@hotmail.', '12', 0),
@@ -270,7 +276,8 @@ INSERT INTO `venta` (`id`, `fechahora`, `usuario`, `total`, `pedido`) VALUES
 (9, '2021-11-13 16:16:56', '1', 100, 8),
 (10, '2021-11-13 16:18:21', '1', 50, 9),
 (11, '2021-11-14 19:11:50', 'admin', 10000, 10),
-(12, '2021-11-14 19:12:15', 'admin', 85000, 11);
+(12, '2021-11-14 19:12:15', 'admin', 85000, 11),
+(13, '2021-11-14 22:20:33', '1', 10000, 12);
 
 -- --------------------------------------------------------
 
@@ -299,7 +306,8 @@ INSERT INTO `ventalineas` (`idventa`, `nrolinea`, `cantidad`, `precio`, `detalle
 (10, 1, 5, 10, '1', 123),
 (11, 1, 1, 5000, 'Juguera Philips Hr1855 Juguera Philips Hr1855', 14),
 (11, 2, 2, 2500, 'Barra de sonido TCL T310', 15),
-(12, 1, 1, 85000, 'Smart TV Samsung 55\" UHD UN55AU7000', 10);
+(12, 1, 1, 85000, 'Smart TV Samsung 55\" UHD UN55AU7000', 10),
+(13, 1, 2, 5000, 'Juguera Philips Hr1855 Juguera Philips Hr1855', 14);
 
 --
 -- Índices para tablas volcadas
@@ -371,13 +379,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas

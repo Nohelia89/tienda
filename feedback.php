@@ -1,5 +1,6 @@
 <?php
 	include("inc/productosAD.php");
+	include("menuadmin.php");
 	
 	session_start();
 	
@@ -30,50 +31,28 @@
 	
 		<link rel="stylesheet" type="text/css" href="css/estilos.css" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 	</head>
 	<body>
 		<header>
-			<div class="cbaner">
+			<div class="cbanner">
 			</div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<div class="container-fluid">
-				  <a class="navbar-brand" href="#"></a>
-				  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				  </button>
-				  <div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav">
-					  <li class="nav-item">
-						<a class="nav-link" aria-current="page" href="index.php">Bienvenido <?php echo $_SESSION["usuario"]; ?></a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="index.php">Productos</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="">Perfil</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="carrito.php">Mi Carrito</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="historial.php">Mis Compras</a>
-					  </li>
-					  <li class="nav-item">
-						<a class="nav-link" href="cerrarsesion.php">Cerrar Sesion</a>
-					  </li>
-					</ul>
-				  </div>
-				</div>
-			  </nav>
+			<?php 
+				verMenu();
+				verMenuAdmin();
+			?>
 		</header>
 		
 		<div class="row row-cols-1 row-cols-md-3 g-4">
             <form>
-            <div class="form-group">
-                <label for="comentario">Comentario: </label>
-                <textarea class="form-control" id="comentario" rows="6"></textarea>
-            </div>
-            <input type="button" value="Enviar" onclick="window.location='index.php'"/>
+				<div style="padding:100px;">
+					<div class="form-group">
+						<label for="comentario">Si desea puede dejarnos su comentario con respecto a su compra:</label>
+						<textarea class="form-control" id="comentario" rows="6"></textarea>
+					</div>
+					<br />
+					<input class="btn btn-info" type="button" value="Enviar" onclick="window.location='index.php'" />
+				</div>
             </form>
         </div>
 
